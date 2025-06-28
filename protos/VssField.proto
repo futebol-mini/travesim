@@ -27,7 +27,7 @@ PROTO VssField [
               metalness 0
             }
             geometry Mesh {
-              url "meshes/base_link.stl"
+              url "meshes/field_base.stl"
             }
           }
           Transform {

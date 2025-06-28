@@ -1,0 +1,332 @@
+#VRML_SIM R2025a utf8
+# license: MIT License
+# license url: https://mit-license.org/
+# This is a proto file for Webots for the GenericVssRobot
+# Extracted from: /home/felipe/Documents/Thunder/tv_ws/compiled.urdf
+
+PROTO GenericVssRobot [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "GenericVssRobot"  # Is `Robot.name`.
+  field  SFString    controller      "robot_controller" # Is `Robot.controller`.
+  field  MFString    controllerArgs  []                 # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""                 # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE              # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE               # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE              # Is `Robot.selfCollision`.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      Shape {
+        appearance PBRAppearance {
+          baseColor 0.500000 0.500000 0.500000
+          roughness 1.000000
+          metalness 0
+        }
+        geometry DEF base_link Mesh {
+          url "meshes/base_link.stl"
+        }
+      }
+      Solid {
+        translation 0.000000 0.000000 0.061000
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor 0.500000 0.500000 0.500000
+              roughness 1.000000
+              metalness 0
+            }
+            geometry Box {
+               size 0.080000 0.080000 0.002000
+            }
+          }
+          Solid {
+            translation 0.017500 0.000000 0.002000
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry Box {
+                   size 0.030000 0.065000 0.002000
+                }
+              }
+            ]
+            name "team_blob_link"
+            physics Physics {
+              density -1
+              mass 0.010000
+              centerOfMass [ 0.000000 0.000000 0.000000 ]
+              inertiaMatrix [
+                6.000000e-06 6.000000e-06 1.000000e-05
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation -0.017500 0.017500 0.002000
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry Box {
+                   size 0.030000 0.030000 0.002000
+                }
+              }
+            ]
+            name "robot_blob_0_link"
+            physics Physics {
+              density -1
+              mass 0.010000
+              centerOfMass [ 0.000000 0.000000 0.000000 ]
+              inertiaMatrix [
+                6.000000e-06 6.000000e-06 1.000000e-05
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+          Solid {
+            translation -0.017500 -0.017500 0.002000
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry Box {
+                   size 0.030000 0.030000 0.002000
+                }
+              }
+            ]
+            name "robot_blob_1_link"
+            physics Physics {
+              density -1
+              mass 0.010000
+              centerOfMass [ 0.000000 0.000000 0.000000 ]
+              inertiaMatrix [
+                6.000000e-06 6.000000e-06 1.000000e-05
+                0.000000e+00 0.000000e+00 0.000000e+00
+              ]
+            }
+          }
+        ]
+        name "chapeu_link"
+        physics Physics {
+          density -1
+          mass 0.012087
+          centerOfMass [ 0.000000 -0.000000 0.061000 ]
+          inertiaMatrix [
+            6.290300e-06 5.669800e-06 1.195200e-05
+            2.303900e-22 -2.908400e-23 -3.724700e-24
+          ]
+        }
+      }
+      Solid {
+        children [
+          Pose {
+            translation 0.000000 -0.038500 0.030000
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry Box {
+                   size 0.075000 0.002000 0.060000
+                }
+              }
+            ]
+          }
+        ]
+        name "parede_dir_link"
+        physics Physics {
+          density -1
+          mass 0.009180
+          centerOfMass [ 0.000000 -0.038500 0.030000 ]
+          inertiaMatrix [
+            2.757100e-06 7.057100e-06 4.306200e-06
+            -2.531200e-23 0.000000e+00 0.000000e+00
+          ]
+        }
+      }
+      Solid {
+        children [
+          Pose {
+            translation 0.000000 0.038500 0.030000
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor 0.500000 0.500000 0.500000
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry Box {
+                   size 0.075000 0.002000 0.060000
+                }
+              }
+            ]
+          }
+        ]
+        name "parede_esq_link"
+        physics Physics {
+          density -1
+          mass 0.009180
+          centerOfMass [ 0.000000 0.038500 0.030000 ]
+          inertiaMatrix [
+            2.757100e-06 7.057100e-06 4.306200e-06
+            -8.765800e-24 -2.159900e-22 3.112000e-24
+          ]
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 1.000000 0.000000
+          anchor 0.000000 -0.035500 0.023000
+          dampingConstant 0.0023
+          staticFriction 0.01
+        }
+        device [
+          RotationalMotor {
+            name "roda_dir_joint"
+            maxVelocity 68.0
+            maxTorque 0.073
+          }
+          PositionSensor {
+            name "roda_dir_joint_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 -0.035500 0.023000
+          children [
+            Pose {
+              translation 0.000000 0.004000 0.000000
+              rotation 1.000000 0.000000 0.000000 1.570796
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    radius 0.025
+                    height 0.008
+                  }
+                }
+              ]
+            }
+          ]
+          name "roda_dir_link"
+          boundingObject Pose {
+            translation 0.000000 0.004000 0.000000
+            rotation 1.000000 0.000000 0.000000 1.570796
+            children [
+              Cylinder {
+                radius 0.025
+                height 0.008
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 0.018064
+            centerOfMass [ 0.000000 0.004000 0.000000 ]
+            inertiaMatrix [
+              2.918900e-06 5.645000e-06 2.918900e-06
+              -3.490800e-39 2.155900e-38 4.993400e-39
+            ]
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 1.000000 0.000000
+          anchor 0.000000 0.035500 0.023000
+          dampingConstant 0.0023
+          staticFriction 0.01
+        }
+        device [
+          RotationalMotor {
+            name "roda_esq_joint"
+            maxVelocity 68.0
+            maxTorque 0.073
+          }
+          PositionSensor {
+            name "roda_esq_joint_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 0.035500 0.023000
+          children [
+            Pose {
+              translation 0.000000 -0.004000 0.000000
+              rotation 1.000000 0.000000 0.000000 1.570796
+              children [
+                Shape {
+                  appearance PBRAppearance {
+                    baseColor 0.500000 0.500000 0.500000
+                    roughness 1.000000
+                    metalness 0
+                  }
+                  geometry Cylinder {
+                    radius 0.025
+                    height 0.008
+                  }
+                }
+              ]
+            }
+          ]
+          name "roda_esq_link"
+          boundingObject Pose {
+            translation 0.000000 -0.004000 0.000000
+            rotation 1.000000 0.000000 0.000000 1.570796
+            children [
+              Cylinder {
+                radius 0.025
+                height 0.008
+              }
+            ]
+          }
+          physics Physics {
+            density -1
+            mass 0.018064
+            centerOfMass [ 0.000000 -0.004000 0.000000 ]
+            inertiaMatrix [
+              2.918900e-06 5.645000e-06 2.918900e-06
+              -3.490800e-39 2.155900e-38 -1.027400e-38
+            ]
+          }
+        }
+      }
+    ]
+    name IS name
+    boundingObject DEF base_link_col Mesh {
+      url "meshes/base_link_col.stl"
+    }
+    physics Physics {
+      density -1
+      mass 0.113374
+      centerOfMass [ 0.000000 -0.000000 0.030022 ]
+      inertiaMatrix [
+        7.537487e-05 7.949780e-05 8.667192e-05
+        1.001923e-21 -2.053691e-21 4.676734e-21
+      ]
+    }
+  }
+}
