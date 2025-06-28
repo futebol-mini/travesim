@@ -1,0 +1,41 @@
+#VRML_SIM R2025a utf8
+# license: MIT License
+# license url: https://mit-license.org/
+# A small orange golf ball
+
+PROTO VssBall [
+  field SFVec3f    translation 0 0 0
+  field SFRotation rotation    0 0 1 0
+  field SFString   name        "VssBall"    
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    children [
+      Shape {
+        appearance PBRAppearance {
+          baseColor 1 0.5 0  # Orange
+          roughness 0.5
+          metalness 0
+        }
+        geometry Sphere {
+          radius 0.02135
+        }
+      }
+    ]
+    boundingObject Sphere {
+      radius 0.02135
+    }
+    physics Physics {
+      density -1
+      mass 0.046
+      centerOfMass [0 0 0]
+      inertiaMatrix [
+        2.935e-05, 2.935e-05, 2.935e-05
+        0, 0, 0
+      ]
+    }
+  }
+}

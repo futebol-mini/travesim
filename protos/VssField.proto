@@ -1,0 +1,85 @@
+#VRML_SIM R2025a utf8
+# license: MIT License
+# license url: https://mit-license.org/
+# A 3v3 IEEE Very Small Size Soccer field
+
+PROTO VssField [
+  field SFVec3f    translation     0 0 0
+  field SFRotation rotation        0 0 1 0
+  field SFString   name            "VssField"
+  field SFBool     locked          TRUE
+]
+{
+  Solid {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    locked IS locked
+    children [
+      DEF BASE_LINK Transform {
+        translation 0 0 0.01
+        children [
+          # Visual elements
+          DEF BASE_VISUAL Shape {
+            appearance PBRAppearance {
+              baseColor 0 0 0
+              roughness 1
+              metalness 0
+            }
+            geometry Mesh {
+              url "meshes/base_link.stl"
+            }
+          }
+          Transform {
+            translation 0 0 0.0001
+            children [
+              DEF FIELD_MARKINGS_VISUAL Shape {
+                appearance PBRAppearance {
+                  baseColor 1 1 1
+                  roughness 1
+                  metalness 0
+                }
+                geometry Mesh {
+                  url "meshes/field_marks.stl"
+                }
+              }
+            ]
+          }
+          DEF SIDES_VISUAL Shape {
+            appearance PBRAppearance {
+              baseColor 1 1 1
+              roughness 1
+              metalness 0
+            }
+            geometry Mesh {
+              url "meshes/wall_link.stl"
+            }
+          }
+        ]
+      }
+    ]
+    
+    # Correct bounding object definition
+    boundingObject Group {
+      children [
+        Transform {
+          translation 0 0 -0.005
+          children [
+            Shape {
+              geometry Box {
+                size 1.75 1.35 0.01
+              }
+            }
+          ]
+        }
+        Shape {
+          geometry Mesh {
+            url "meshes/wall_link.stl"
+          }
+        }
+      ]
+    }
+    
+    physics NULL  # Makes the field static
+  }
+}
