@@ -17,7 +17,7 @@ PROTO VssField [
     locked IS locked
     children [
       DEF BASE_LINK Transform {
-        translation 0 0 0.01
+        translation 0 0 0
         children [
           # Visual elements
           DEF BASE_VISUAL Shape {
