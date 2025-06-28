@@ -5,15 +5,18 @@
 # Extracted from: /home/felipe/Documents/Thunder/tv_ws/compiled.urdf
 
 PROTO GenericVssRobot [
-  field  SFVec3f     translation     0 0 0
-  field  SFRotation  rotation        0 0 1 0
-  field  SFString    name            "GenericVssRobot"  # Is `Robot.name`.
-  field  SFString    controller      "robot_controller" # Is `Robot.controller`.
-  field  MFString    controllerArgs  []                 # Is `Robot.controllerArgs`.
-  field  SFString    customData      ""                 # Is `Robot.customData`.
-  field  SFBool      supervisor      FALSE              # Is `Robot.supervisor`.
-  field  SFBool      synchronization TRUE               # Is `Robot.synchronization`.
-  field  SFBool      selfCollision   FALSE              # Is `Robot.selfCollision`.
+  field  SFVec3f     translation            0 0 0
+  field  SFRotation  rotation               0 0 1 0
+  field  SFString    name                   "GenericVssRobot"  # Is `Robot.name`.
+  field  SFString    controller             "robot_controller" # Is `Robot.controller`.
+  field  MFString    controllerArgs         []                 # Is `Robot.controllerArgs`.
+  field  SFString    customData             ""                 # Is `Robot.customData`.
+  field  SFBool      supervisor             FALSE              # Is `Robot.supervisor`.
+  field  SFBool      synchronization        TRUE               # Is `Robot.synchronization`.
+  field  SFBool      selfCollision          FALSE              # Is `Robot.selfCollision`.
+  field  SFColor     teamColor              0 0 1              # Default orange (RGB, 0-1 range)
+  field  SFColor     robotPrimaryColor      1 0 0              # Default orange (RGB, 0-1 range)
+  field  SFColor     robotSecondaryColor    0 1 0              # Default orange (RGB, 0-1 range)
 ]
 {
   Robot {
@@ -28,7 +31,7 @@ PROTO GenericVssRobot [
     children [
       Shape {
         appearance PBRAppearance {
-          baseColor 0.500000 0.500000 0.500000
+          baseColor 0.100000 0.100000 0.100000
           roughness 1.000000
           metalness 0
         }
@@ -54,7 +57,7 @@ PROTO GenericVssRobot [
             children [
               Shape {
                 appearance PBRAppearance {
-                  baseColor 0.500000 0.500000 0.500000
+                  baseColor IS teamColor
                   roughness 1.000000
                   metalness 0
                 }
@@ -79,7 +82,7 @@ PROTO GenericVssRobot [
             children [
               Shape {
                 appearance PBRAppearance {
-                  baseColor 0.500000 0.500000 0.500000
+                  baseColor IS robotPrimaryColor
                   roughness 1.000000
                   metalness 0
                 }
@@ -104,7 +107,7 @@ PROTO GenericVssRobot [
             children [
               Shape {
                 appearance PBRAppearance {
-                  baseColor 0.500000 0.500000 0.500000
+                  baseColor IS robotSecondaryColor
                   roughness 1.000000
                   metalness 0
                 }
@@ -155,6 +158,7 @@ PROTO GenericVssRobot [
           }
         ]
         name "parede_dir_link"
+        contactMaterial "parede_dir"
         physics Physics {
           density -1
           mass 0.009180
@@ -184,6 +188,7 @@ PROTO GenericVssRobot [
           }
         ]
         name "parede_esq_link"
+        contactMaterial "parede_esq"
         physics Physics {
           density -1
           mass 0.009180
@@ -233,6 +238,7 @@ PROTO GenericVssRobot [
             }
           ]
           name "roda_dir_link"
+          contactMaterial "roda_dir_mat"
           boundingObject Pose {
             translation 0.000000 0.004000 0.000000
             rotation 1.000000 0.000000 0.000000 1.570796
@@ -293,6 +299,7 @@ PROTO GenericVssRobot [
             }
           ]
           name "roda_esq_link"
+          contactMaterial "roda_esq_mat"
           boundingObject Pose {
             translation 0.000000 -0.004000 0.000000
             rotation 1.000000 0.000000 0.000000 1.570796
@@ -316,6 +323,7 @@ PROTO GenericVssRobot [
       }
     ]
     name IS name
+    contactMaterial "base_mat"
     boundingObject DEF base_link_col Mesh {
       url "meshes/base_link_col.stl"
     }
