@@ -4,12 +4,14 @@ EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/project
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "../protos/VssField.proto"
 EXTERNPROTO "../protos/VssBall.proto"
+EXTERNPROTO "../protos/GenericVssRobot.proto"
 
 WorldInfo {
+  basicTimeStep 1
 }
 Viewpoint {
   orientation -0.3128339545290107 0.34928920511793066 0.88325079568706 1.5847233141163957
-  position -0.28342184712917073 -2.6000994138740627 2.2357081983609657
+  position -0.07272490379700232 -0.692314966464686 0.6810379609411082
 }
 TexturedBackground {
 }
@@ -19,4 +21,7 @@ VssField {
 }
 VssBall {
   translation 0 0 0.022
+}
+GenericVssRobot {
+  translation -0.15 0 0.04
 }
