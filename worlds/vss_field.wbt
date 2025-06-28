@@ -7,7 +7,13 @@ EXTERNPROTO "../protos/VssBall.proto"
 EXTERNPROTO "../protos/GenericVssRobot.proto"
 
 WorldInfo {
-  basicTimeStep 1
+  basicTimeStep 0.5
+  contactProperties [
+    ContactProperties {
+      material1 "base_mat"
+      maxContactJoints 20
+    }
+  ]
 }
 Viewpoint {
   orientation -0.3128339545290107 0.34928920511793066 0.88325079568706 1.5847233141163957
@@ -23,5 +29,38 @@ VssBall {
   translation 0 0 0.022
 }
 GenericVssRobot {
-  translation -0.15 0 0.04
+  translation 0.15 0 0.0025
+  rotation 0 0 1 -3.14159
+  name "YellowRobot0"
+  teamColor 1 1 0
+}
+GenericVssRobot {
+  translation 0.3 0.45 0.0025
+  rotation 0 0 1 -3.14159
+  name "YellowRobot1"
+  teamColor 1 1 0
+  robotPrimaryColor 0 1 0
+  robotSecondaryColor 1 0 1
+}
+GenericVssRobot {
+  translation 0.3 -0.45 0.0025
+  rotation 0 0 1 -3.14159
+  name "YellowRobot2"
+  teamColor 1 1 0
+  robotPrimaryColor 0 1 1
+}
+GenericVssRobot {
+  translation -0.15 0 0.0025
+  name "BlueRobot0"
+}
+GenericVssRobot {
+  translation -0.3 0.45 0.0025
+  name "BlueRobot1"
+  robotPrimaryColor 0 1 0
+  robotSecondaryColor 1 0 1
+}
+GenericVssRobot {
+  translation -0.3 -0.45 0.0025
+  name "BlueRobot2"
+  robotPrimaryColor 0 1 1
 }
