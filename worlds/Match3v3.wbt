@@ -1,7 +1,6 @@
 #VRML_SIM R2025a utf8
 
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
-EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
 EXTERNPROTO "../protos/VssField.proto"
 EXTERNPROTO "../protos/VssBall.proto"
 EXTERNPROTO "../protos/GenericVssRobot.proto"
@@ -20,8 +19,6 @@ Viewpoint {
   position -0.07272490379700232 -0.692314966464686 0.6810379609411082
 }
 TexturedBackground {
-}
-TexturedBackgroundLight {
 }
 VssField {
 }
@@ -63,4 +60,6 @@ GenericVssRobot {
   translation -0.3 -0.45 0.0025
   name "BlueRobot2"
   robotPrimaryColor 0 1 1
+}
+DirectionalLight {
 }
