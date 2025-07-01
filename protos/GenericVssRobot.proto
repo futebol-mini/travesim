@@ -8,7 +8,7 @@ PROTO GenericVssRobot [
   field  SFVec3f     translation            0 0 0
   field  SFRotation  rotation               0 0 1 0
   field  SFString    name                   "GenericVssRobot"  # Is `Robot.name`.
-  field  SFString    controller             "robot_controller" # Is `Robot.controller`.
+  field  SFString    controller             "<none>" # Is `Robot.controller`.
   field  MFString    controllerArgs         []                 # Is `Robot.controllerArgs`.
   field  SFString    customData             ""                 # Is `Robot.customData`.
   field  SFBool      supervisor             FALSE              # Is `Robot.supervisor`.
@@ -20,6 +20,7 @@ PROTO GenericVssRobot [
 ]
 {
   Robot {
+    name IS name
     translation IS translation
     rotation IS rotation
     controller IS controller
@@ -67,15 +68,15 @@ PROTO GenericVssRobot [
               }
             ]
             name "team_blob_link"
-            physics Physics {
-              density -1
-              mass 0.010000
-              centerOfMass [ 0.000000 0.000000 0.000000 ]
-              inertiaMatrix [
-                6.000000e-06 6.000000e-06 1.000000e-05
-                0.000000e+00 0.000000e+00 0.000000e+00
-              ]
-            }
+            # physics Physics {
+            #   density -1
+            #   mass 0.010000
+            #   centerOfMass [ 0.000000 0.000000 0.000000 ]
+            #   inertiaMatrix [
+            #     6.000000e-06 6.000000e-06 1.000000e-05
+            #     0.000000e+00 0.000000e+00 0.000000e+00
+            #   ]
+            # }
           }
           Solid {
             translation -0.017500 0.017500 0.002000
@@ -92,15 +93,15 @@ PROTO GenericVssRobot [
               }
             ]
             name "robot_blob_0_link"
-            physics Physics {
-              density -1
-              mass 0.010000
-              centerOfMass [ 0.000000 0.000000 0.000000 ]
-              inertiaMatrix [
-                6.000000e-06 6.000000e-06 1.000000e-05
-                0.000000e+00 0.000000e+00 0.000000e+00
-              ]
-            }
+            # physics Physics {
+            #   density -1
+            #   mass 0.010000
+            #   centerOfMass [ 0.000000 0.000000 0.000000 ]
+            #   inertiaMatrix [
+            #     6.000000e-06 6.000000e-06 1.000000e-05
+            #     0.000000e+00 0.000000e+00 0.000000e+00
+            #   ]
+            # }
           }
           Solid {
             translation -0.017500 -0.017500 0.002000
@@ -117,27 +118,27 @@ PROTO GenericVssRobot [
               }
             ]
             name "robot_blob_1_link"
-            physics Physics {
-              density -1
-              mass 0.010000
-              centerOfMass [ 0.000000 0.000000 0.000000 ]
-              inertiaMatrix [
-                6.000000e-06 6.000000e-06 1.000000e-05
-                0.000000e+00 0.000000e+00 0.000000e+00
-              ]
-            }
+            # physics Physics {
+            #   density -1
+            #   mass 0.010000
+            #   centerOfMass [ 0.000000 0.000000 0.000000 ]
+            #   inertiaMatrix [
+            #     6.000000e-06 6.000000e-06 1.000000e-05
+            #     0.000000e+00 0.000000e+00 0.000000e+00
+            #   ]
+            # }
           }
         ]
         name "chapeu_link"
-        physics Physics {
-          density -1
-          mass 0.012087
-          centerOfMass [ 0.000000 -0.000000 0.061000 ]
-          inertiaMatrix [
-            6.290300e-06 5.669800e-06 1.195200e-05
-            2.303900e-22 -2.908400e-23 -3.724700e-24
-          ]
-        }
+        # physics Physics {
+        #   density -1
+        #   mass 0.012087
+        #   centerOfMass [ 0.000000 -0.000000 0.061000 ]
+        #   inertiaMatrix [
+        #     6.290300e-06 5.669800e-06 1.195200e-05
+        #     2.303900e-22 -2.908400e-23 -3.724700e-24
+        #   ]
+        # }
       }
       Solid {
         children [
@@ -159,15 +160,15 @@ PROTO GenericVssRobot [
         ]
         name "parede_dir_link"
         contactMaterial "parede_dir"
-        physics Physics {
-          density -1
-          mass 0.009180
-          centerOfMass [ 0.000000 -0.038500 0.030000 ]
-          inertiaMatrix [
-            2.757100e-06 7.057100e-06 4.306200e-06
-            -2.531200e-23 0.000000e+00 0.000000e+00
-          ]
-        }
+        # physics Physics {
+        #   density -1
+        #   mass 0.009180
+        #   centerOfMass [ 0.000000 -0.038500 0.030000 ]
+        #   inertiaMatrix [
+        #     2.757100e-06 7.057100e-06 4.306200e-06
+        #     -2.531200e-23 0.000000e+00 0.000000e+00
+        #   ]
+        # }
       }
       Solid {
         children [
@@ -189,15 +190,15 @@ PROTO GenericVssRobot [
         ]
         name "parede_esq_link"
         contactMaterial "parede_esq"
-        physics Physics {
-          density -1
-          mass 0.009180
-          centerOfMass [ 0.000000 0.038500 0.030000 ]
-          inertiaMatrix [
-            2.757100e-06 7.057100e-06 4.306200e-06
-            -8.765800e-24 -2.159900e-22 3.112000e-24
-          ]
-        }
+        # physics Physics {
+        #   density -1
+        #   mass 0.009180
+        #   centerOfMass [ 0.000000 0.038500 0.030000 ]
+        #   inertiaMatrix [
+        #     2.757100e-06 7.057100e-06 4.306200e-06
+        #     -8.765800e-24 -2.159900e-22 3.112000e-24
+        #   ]
+        # }
       }
       HingeJoint {
         jointParameters HingeJointParameters {
