@@ -78,13 +78,7 @@ int main(int argc, char **argv)
   while (referee->step(time_step) != -1)
   {
 
-    // const double (&position)[3] = *const_cast<const double(*)[3]>(root->getPosition());
-
-    // std::span<const double, 3> position(root->getPosition(), 3);
-    // std::cout << "Position: ";
-
-    // const double (*position)[3] = reinterpret_cast<const double (*)[3]>(yellow_robot->getPosition());
-    const double *position = yellow_robot->getPosition();
+    const double (&position)[3] = *reinterpret_cast<const double(*)[3]>(yellow_robot->getPosition());
 
     std::cout << position[0] << ", " << position[1] << ", " << position[2] << "\n";
   };
