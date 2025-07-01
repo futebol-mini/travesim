@@ -6,7 +6,7 @@ EXTERNPROTO "../protos/VssBall.proto"
 EXTERNPROTO "../protos/GenericVssRobot.proto"
 
 WorldInfo {
-  basicTimeStep 0.5
+  basicTimeStep 20
   contactProperties [
     ContactProperties {
       material1 "base_mat"
@@ -14,16 +14,16 @@ WorldInfo {
     }
   ]
 }
+Viewpoint {
+  orientation -0.09942160257028508 0.1266887320333666 0.986947470799806 1.3435809368616682
+  position -0.1881974139610358 -0.9436338789821592 0.4174913517480159
+}
 Robot {
   translation 0 0 1
   name "Referee"
   locked TRUE
   controller "referee_controller"
   supervisor TRUE
-}
-Viewpoint {
-  orientation -0.09942160257028508 0.1266887320333666 0.986947470799806 1.3435809368616682
-  position -0.1881974139610358 -0.9436338789821592 0.4174913517480159
 }
 TexturedBackground {
 }
