@@ -1,0 +1,59 @@
+#VRML_SIM R2025a utf8
+# template language: javascript
+# license: MIT License
+# license url: https://mit-license.org/
+# This is a proto file for Webots for the VssReferee
+
+PROTO VssReferee [
+  field  SFString    name                       "VssReferee"       # Is `Robot.name`.
+  field  SFString    controller                 "referee_controller"       # Is `Robot.name`.
+
+  field  SFString    replacer_address           "127.0.0.1"       # Is `Robot.name`.
+  field  SFInt32     replacer_port              20011
+
+  field  SFString    yellow_team_address        "127.0.0.1"       # Is `Robot.name`.
+  field  SFInt32     yellow_team_port           20012
+
+  field  SFString    blue_team_address          "127.0.0.1"       # Is `Robot.name`.
+  field  SFInt32     blue_team_port             20013
+
+  field  SFString    vision_multicast_address   "224.0.0.1"       # Is `Robot.name`.
+  field  SFInt32     multicast_port             10002
+
+]
+{
+
+  %<
+    const replacer_address = fields.replacer_address.value
+    const replacer_port = fields.replacer_port.value
+
+    const yellow_team_address = fields.yellow_team_address.value
+    const yellow_team_port = fields.yellow_team_port.value
+
+    const blue_team_address = fields.blue_team_address.value
+    const blue_team_port = fields.blue_team_port.value
+
+    const vision_multicast_address = fields.vision_multicast_address.value
+    const multicast_port = fields.multicast_port.value
+  >%
+  Robot {
+    name IS name
+    controller IS controller
+    controllerArgs [
+      "%<= replacer_address >%"
+      "%<= replacer_port >%"
+
+      "%<= yellow_team_address >%"
+      "%<= yellow_team_port >%"
+
+      "%<= blue_team_address >%"
+      "%<= blue_team_port >%"
+
+      "%<= vision_multicast_address >%"
+      "%<= multicast_port >%"
+    ]
+    translation 0 0 1
+    locked TRUE
+    supervisor TRUE
+  }
+}

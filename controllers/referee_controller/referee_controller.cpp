@@ -17,42 +17,10 @@
 #include <unordered_map>
 #include <iomanip>
 
-int main(int argc, char **argv)
-{
+std::shared_ptr<std::unordered_map<std::string, webots::Node *>> get_robots_references(webots::Field *children){
 
-  std::cout << "Les gooo" << "\n";
-  // create the Robot instance.
-  std::cout << "Get supervisor" << "\n";
-
-  auto referee = std::make_unique<webots::Supervisor>();
-
-  // get the time step of the current world.
-  auto time_step = (int)referee->getBasicTimeStep();
-
-  std::cout << "Get robot" << "\n";
-
-  webots::Node *root = referee->getRoot();
-
-  std::cout << "Get children\n";
-  webots::Field *children = root->getField("children");
-
-  if (!children)
-  {
-    std::cout << "Quebrou 2!\n";
-    std::exit(-1);
-  }
-
+  auto entities = std::make_shared<std::unordered_map<std::string, webots::Node *>>();
   auto count = children->getCount();
-  std::cout << "Node count: " << count << std::endl;
-
-  std::unordered_map<std::string, webots::Node *> entities = {
-      {"YellowRobot0", nullptr},
-      {"YellowRobot1", nullptr},
-      {"YellowRobot2", nullptr},
-      {"BlueRobot0", nullptr},
-      {"BlueRobot1", nullptr},
-      {"BlueRobot2", nullptr},
-  };
 
   for (int i = 0; i < count; i++)
   {
@@ -60,31 +28,40 @@ int main(int argc, char **argv)
     auto *name = node->getField("name");
     if (name)
     {
-      std::cout << "-> " << name->getSFString() << std::endl;
-      entities[name->getSFString()] = node;
+      (*entities)[name->getSFString()] = node;
     }
-    else
-      std::cout << "-> " << "NoName" << std::endl;
   }
 
-  auto yellow_robot = entities["YellowRobot0"];
+  return entities;
+}
 
-  if (!yellow_robot)
-  {
-    std::cout << "Quebrou 3!\n";
-    std::exit(-1);
-  }
+int main(int argc, char **argv)
+{
+  auto referee = std::make_unique<webots::Supervisor>();
+
+  auto time_step = (uint16_t) referee->getBasicTimeStep();
+
+  webots::Node *root = referee->getRoot();
+  webots::Field *children = root->getField("children");
+
+  auto count = children->getCount();
+  std::cout << "Node count: " << count << std::endl;
+
+  auto entities = get_robots_references(children);
+
+  auto yellow_robot = entities->at("YellowRobot0");
+
   std::cout << std::fixed << std::setprecision(2);
+
+  std::cout << "Server: " << argv[1] << std::endl;
+  std::cout << "Port: " << argv[2] << std::endl;
+
   while (referee->step(time_step) != -1)
   {
-
     const double (&position)[3] = *reinterpret_cast<const double(*)[3]>(yellow_robot->getPosition());
 
-    std::cout << position[0] << ", " << position[1] << ", " << position[2] << "\n";
+    // std::cout << position[0] << ", " << position[1] << ", " << position[2] << "\n";
   };
 
-  // Enter here exit cleanup code.
-
-  // delete referee;
   return 0;
 }

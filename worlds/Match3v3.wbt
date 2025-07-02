@@ -1,12 +1,13 @@
 #VRML_SIM R2025a utf8
 
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "../protos/VssReferee.proto"
 EXTERNPROTO "../protos/VssField.proto"
 EXTERNPROTO "../protos/VssBall.proto"
 EXTERNPROTO "../protos/GenericVssRobot.proto"
 
 WorldInfo {
-  basicTimeStep 20
+  basicTimeStep 10
   contactProperties [
     ContactProperties {
       material1 "base_mat"
@@ -15,15 +16,10 @@ WorldInfo {
   ]
 }
 Viewpoint {
-  orientation -0.09942160257028508 0.1266887320333666 0.986947470799806 1.3435809368616682
-  position -0.1881974139610358 -0.9436338789821592 0.4174913517480159
+  orientation -0.2978199444432 0.2978216669116205 0.906976039049452 1.6682845414828267
+  position 0.0023543403159818205 -2.3696378618703475 1.7152698920249012
 }
-Robot {
-  translation 0 0 1
-  name "Referee"
-  locked TRUE
-  controller "referee_controller"
-  supervisor TRUE
+VssReferee {
 }
 TexturedBackground {
 }
