@@ -1,0 +1,3 @@
+[submodule "vsss_sim_pb_msgs"]
+	path = controllers/referee_controller/proto
+	url = https://github.com/futebol-mini/VSSSProto.git
