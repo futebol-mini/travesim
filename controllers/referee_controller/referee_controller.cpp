@@ -17,6 +17,8 @@
 #include <unordered_map>
 #include <iomanip>
 
+#include "Robot.hpp"
+
 std::shared_ptr<std::unordered_map<std::string, webots::Node *>> get_robots_references(webots::Field *children){
 
   auto entities = std::make_shared<std::unordered_map<std::string, webots::Node *>>();
@@ -37,28 +39,34 @@ std::shared_ptr<std::unordered_map<std::string, webots::Node *>> get_robots_refe
 
 int main(int argc, char **argv)
 {
+  std::cout << "Referee addr: " << argv[1] << std::endl;
+  std::cout << "Referee port: " << argv[2] << std::endl;
+
+  std::cout << "Yellow addr: " << argv[3] << std::endl;
+  std::cout << "Yellow port: " << argv[4] << std::endl;
+
+  std::cout << "Blue addr: " << argv[5] << std::endl;
+  std::cout << "Blue port: " << argv[6] << std::endl;
+
+  std::cout << "Vision addr: " << argv[7] << std::endl;
+  std::cout << "Vision port: " << argv[8] << std::endl;
+
   auto referee = std::make_unique<webots::Supervisor>();
 
   auto time_step = (uint16_t) referee->getBasicTimeStep();
 
-  webots::Node *root = referee->getRoot();
-  webots::Field *children = root->getField("children");
+  webots::Field *children = referee->getRoot()->getField("children");
 
-  auto count = children->getCount();
-  std::cout << "Node count: " << count << std::endl;
+  auto robots = get_robots_references(children);
 
-  auto entities = get_robots_references(children);
-
-  auto yellow_robot = entities->at("YellowRobot0");
+  auto yellow_robot_ptr = robots->at("YellowRobot0");
+  auto yellow_robot = vss::Robot(yellow_robot_ptr);
 
   std::cout << std::fixed << std::setprecision(2);
 
-  std::cout << "Server: " << argv[1] << std::endl;
-  std::cout << "Port: " << argv[2] << std::endl;
-
   while (referee->step(time_step) != -1)
   {
-    const double (&position)[3] = *reinterpret_cast<const double(*)[3]>(yellow_robot->getPosition());
+    auto position = yellow_robot.get_position();
 
     // std::cout << position[0] << ", " << position[1] << ", " << position[2] << "\n";
   };

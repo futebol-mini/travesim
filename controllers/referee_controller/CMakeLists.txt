@@ -20,10 +20,13 @@ set(LIBRARIES
 include_directories(
     $ENV{WEBOTS_HOME}/include/controller/c
     $ENV{WEBOTS_HOME}/include/controller/cpp
+
+    include
 )
 
 add_executable(referee_controller
     referee_controller.cpp
+    src/Robot.cpp
 )
 
 target_link_directories(referee_controller PUBLIC
