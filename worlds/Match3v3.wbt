@@ -19,6 +19,8 @@ Viewpoint {
   orientation -0.2978199444432 0.2978216669116205 0.906976039049452 1.6682845414828267
   position 0.0023543403159818205 -2.3696378618703475 1.7152698920249012
 }
+DirectionalLight {
+}
 VssReferee {
 }
 TexturedBackground {
@@ -63,6 +65,4 @@ GenericVssRobot {
   translation -0.3 -0.45 0.0025
   name "BlueRobot2"
   robotPrimaryColor 0 1 1
-}
-DirectionalLight {
 }
