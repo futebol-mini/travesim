@@ -1,4 +1,5 @@
 #VRML_SIM R2025a utf8
+# template language: javascript
 # license: MIT License
 # license url: https://mit-license.org/
 # This is a proto file for Webots for the GenericVssRobot
@@ -9,6 +10,8 @@ PROTO GenericVssRobot [
   field  SFRotation  rotation               0 0 1 0
   field  SFString    name                   "GenericVssRobot"  # Is `Robot.name`.
   field  SFString    controller             "<none>"           # Is `Robot.controller`.
+  field  SFString    teamName               ""                 # Is `Robot.controller`.
+  field  SFInt32     robotNumber            0                  # Is `Robot.controller`.
   field  MFString    controllerArgs         []                 # Is `Robot.controllerArgs`.
   field  SFString    customData             ""                 # Is `Robot.customData`.
   field  SFBool      supervisor             FALSE              # Is `Robot.supervisor`.
@@ -19,12 +22,19 @@ PROTO GenericVssRobot [
   field  SFColor     robotSecondaryColor    0 1 0              # Default orange (RGB, 0-1 range)
 ]
 {
+  %<
+    const team_name = fields.teamName.value
+    const robot_number = fields.robotNumber.value
+  >%
   Robot {
     name IS name
     translation IS translation
     rotation IS rotation
     controller IS controller
-    controllerArgs IS controllerArgs
+    controllerArgs [
+      "%<= team_name >%"
+      "%<= robot_number >%"
+    ]
     customData IS customData
     supervisor IS supervisor
     synchronization IS synchronization
@@ -32,7 +42,7 @@ PROTO GenericVssRobot [
     children [
       Shape {
         appearance PBRAppearance {
-          baseColor 0.100000 0.100000 0.100000
+          baseColor 0.500000 0.500000 0.500000
           roughness 1.000000
           metalness 0
         }
@@ -209,7 +219,7 @@ PROTO GenericVssRobot [
         }
         device [
           RotationalMotor {
-            name "roda_dir_joint"
+            name "right_motor"
             maxVelocity 68.0
             maxTorque 0.073
           }
@@ -270,7 +280,7 @@ PROTO GenericVssRobot [
         }
         device [
           RotationalMotor {
-            name "roda_esq_joint"
+            name "left_motor"
             maxVelocity 68.0
             maxTorque 0.073
           }
@@ -321,6 +331,10 @@ PROTO GenericVssRobot [
             ]
           }
         }
+      }
+      Receiver{
+        type "radio"
+        name "robot_receiver"
       }
     ]
     contactMaterial "base_mat"

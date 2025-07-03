@@ -22,7 +22,6 @@ PROTO VssReferee [
 
 ]
 {
-
   %<
     const replacer_address = fields.replacer_address.value
     const replacer_port = fields.replacer_port.value
@@ -55,5 +54,15 @@ PROTO VssReferee [
     translation 0 0 1
     locked TRUE
     supervisor TRUE
+    children[
+      Emitter {
+        type "radio"
+        name "yellow_team"
+      }
+      Emitter {
+        type "radio"
+        name "blue_team"
+      }
+    ]
   }
 }

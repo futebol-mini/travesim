@@ -1,3 +1,4 @@
 **/build/
 controllers/referee_controller/referee_controller
+controllers/vss_robot_controller/vss_robot_controller
 worlds/*.jpg

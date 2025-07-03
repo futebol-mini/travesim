@@ -10,6 +10,7 @@
 #include <webots/Robot.hpp>
 #include <webots/Supervisor.hpp>
 #include <webots/Node.hpp>
+#include <webots/Emitter.hpp>
 #include <memory>
 #include <array>
 #include <span>
@@ -59,14 +60,21 @@ int main(int argc, char **argv)
 
   auto robots = get_robots_references(children);
 
-  auto yellow_robot_ptr = robots->at("YellowRobot0");
-  auto yellow_robot = vss::Robot(yellow_robot_ptr);
+  uint32_t frame = 0;
 
-  std::cout << std::fixed << std::setprecision(2);
+  webots::Emitter *yellow_team_emitter = referee->getEmitter("yellow_team");
+  webots::Emitter *blue_team_emitter = referee->getEmitter("blue_team");
+
+  yellow_team_emitter->setChannel(0);
+  blue_team_emitter->setChannel(1);
 
   while (referee->step(time_step) != -1)
   {
-    auto position = yellow_robot.get_position();
+    frame++;
+
+    yellow_team_emitter->send(&frame, sizeof(frame));
+
+    // yellow_robot_ptr
 
     // std::cout << position[0] << ", " << position[1] << ", " << position[2] << "\n";
   };
