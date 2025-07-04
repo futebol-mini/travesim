@@ -1,0 +1,31 @@
+{
+    "ros.distro": "noetic",
+    "doxdocgen.generic.dateFormat": "MM/YYYY",
+    "doxdocgen.file.copyrightTag": [
+        "@copyright MIT License - Copyright (c) {year} ThundeRatz"
+    ],
+    "doxdocgen.generic.authorTag": "@author {author} <{email}>",
+    "doxdocgen.file.fileOrder": [
+        "file",
+        "author",
+        "brief",
+        "date",
+        "empty",
+        "copyright",
+        "empty",
+        "custom"
+    ],
+    "markdown.extension.toc.levels": "2..3",
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/ros/noetic/lib/python3/dist-packages"
+    ],
+    "editor.formatOnSave": true,
+
+    "files.associations": {
+        "*.test": "xml",
+        "*.cfg": "python"
+    }
+}
