@@ -1,0 +1,17 @@
+
+name: Build
+on:
+  push:
+  pull_request:
+jobs:
+  build-linux:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-18.04, ubuntu-20.04 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Install dependencies"
+        run: sudo apt-get install build-essential cmake libprotobuf-dev protobuf-compiler
+      - name: "Build"
+        run: mkdir proto && cd proto && cmake .. && make
