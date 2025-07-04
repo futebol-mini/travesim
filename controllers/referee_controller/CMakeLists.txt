@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.22)
 
 project(referee_controller CXX)
 
-add_subdirectory(libs/proto)
+add_subdirectory(adapters)
 
 if(NOT DEFINED ENV{WEBOTS_HOME})
   if(WIN32)
@@ -30,6 +30,7 @@ include_directories(
     $ENV{WEBOTS_HOME}/include/controller/cpp
 
     include
+    adapters/include
 )
 
 add_executable(referee_controller
@@ -43,6 +44,7 @@ target_link_directories(referee_controller PUBLIC
 
 target_link_libraries(referee_controller
     ${LIBRARIES}
+    travesim_adapters_protobuf_comm
     pb_msgs_lib
 )
 

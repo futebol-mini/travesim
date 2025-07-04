@@ -20,6 +20,9 @@
 
 #include "Robot.hpp"
 
+#include "travesim_adapters/protobuf/vision_sender.hpp"
+#include "travesim_adapters/data/field_state.hpp"
+
 std::shared_ptr<std::unordered_map<std::string, webots::Node *>> get_robots_references(webots::Field *children){
 
   auto entities = std::make_shared<std::unordered_map<std::string, webots::Node *>>();
@@ -52,6 +55,14 @@ int main(int argc, char **argv)
   std::cout << "Vision addr: " << argv[7] << std::endl;
   std::cout << "Vision port: " << argv[8] << std::endl;
 
+  std::string multicast_addr(argv[7]);
+
+  uint32_t multicast_port = std::stoi(argv[8]);
+
+  auto vision_sender = travesim::proto::VisionSender(multicast_addr, multicast_port);
+
+  auto field_state = travesim::FieldState();
+  
   auto referee = std::make_unique<webots::Supervisor>();
 
   auto time_step = (uint16_t) referee->getBasicTimeStep();
@@ -60,23 +71,27 @@ int main(int argc, char **argv)
 
   auto robots = get_robots_references(children);
 
-  uint32_t frame = 0;
-
   webots::Emitter *yellow_team_emitter = referee->getEmitter("yellow_team");
   webots::Emitter *blue_team_emitter = referee->getEmitter("blue_team");
 
   yellow_team_emitter->setChannel(0);
   blue_team_emitter->setChannel(1);
 
+  uint32_t frame = 0;
+
+  auto yellow_robot = vss::Robot(robots->at("YellowRobot0"));
   while (referee->step(time_step) != -1)
   {
     frame++;
 
     yellow_team_emitter->send(&frame, sizeof(frame));
 
-    // yellow_robot_ptr
+    field_state.yellow_team[0].position = yellow_robot.get_position2d();
+    field_state.yellow_team[0].angular_position = yellow_robot.get_yaw();
+  
+    vision_sender.send(&field_state);
 
-    // std::cout << position[0] << ", " << position[1] << ", " << position[2] << "\n";
+    std::cout << "Angular position: " << yellow_robot.get_yaw()/3.1416*180 << std::endl;
   };
 
   return 0;

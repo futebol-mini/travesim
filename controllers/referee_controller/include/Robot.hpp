@@ -1,6 +1,8 @@
 #include <webots/Robot.hpp>
 #include <webots/Node.hpp>
 
+#include "travesim_adapters/data/entity_state.hpp"
+
 namespace vss
 {
     class Robot
@@ -9,6 +11,10 @@ namespace vss
         Robot(webots::Node *robot_ptr) : robot_ptr(robot_ptr) {};
 
         std::array<double, 3> get_position();
+
+        travesim::Vector2D get_position2d();
+
+        double get_yaw();
 
     private:
         webots::Node *robot_ptr;
