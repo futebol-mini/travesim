@@ -1,10 +1,18 @@
 # Ref: https://www.cyberbotics.com/doc/guide/using-your-ide?version=released&tab-language=c++#cmake
 
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.22)
 
 project(referee_controller CXX)
 
-add_subdirectory(proto)
+add_subdirectory(libs/proto)
+
+if(NOT DEFINED ENV{WEBOTS_HOME})
+  if(WIN32)
+    set(ENV{WEBOTS_HOME} "C:\\Program Files\\Webots")
+  else()
+    set(ENV{WEBOTS_HOME} "/usr/local/webots")
+  endif()
+endif()
 
 if(WIN32)
   link_directories($ENV{WEBOTS_HOME}/msys64/mingw64/bin)

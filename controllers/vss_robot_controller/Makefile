@@ -65,6 +65,8 @@
 ###
 ###-----------------------------------------------------------------------------
 
+WEBOTS_HOME ?= /usr/local/webots
+
 ### Do not modify: this includes Webots global Makefile.include
 null :=
 space := $(null) $(null)
