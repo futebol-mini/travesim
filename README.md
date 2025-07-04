@@ -19,5 +19,5 @@ git submodules update --init --recursive
 ## Dependencies
 
 ```bash
-sudo apt install -y protobuf-compiler cmake
+sudo apt install -y protobuf-compiler cmake libboost-system-dev libboost-thread-dev
 ```
