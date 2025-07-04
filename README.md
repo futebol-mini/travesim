@@ -15,3 +15,9 @@ Then, init all submodules with
 ```bash
 git submodules update --init --recursive
 ```
+
+## Dependencies
+
+```bash
+sudo apt install -y protobuf-compiler cmake
+```
