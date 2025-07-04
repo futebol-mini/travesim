@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <test test-name="vision_receiver" pkg="travesim_adapters" type="vision_receiver.test" />
+</launch>

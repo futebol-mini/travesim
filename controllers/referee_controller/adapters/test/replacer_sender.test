@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <test test-name="replacer_sender" pkg="travesim_adapters" time-limit="10.0" type="replacer_sender.test" />
+
+  <node name="gazebo_services" pkg="travesim_adapters" type="gazebo_services.mock"/>
+  <node pkg="rosbag" type="play" name="player" output="screen" args="--loop $(find travesim_adapters)/test/mocks/data/gazebo_model_states.bag"/>
+</launch>
