@@ -6,11 +6,12 @@
 
 namespace travesim {
 namespace webots_adapter {
-typedef struct {
+template <uint8_t size>
+using message_t = struct {
     uint32_t frame;
-    double   left_speed;
-    double   right_speed;
-} message_t;
+    double   left_speed[size];
+    double   right_speed[size];
+};
 }
 } // namespace
 

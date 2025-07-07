@@ -18,7 +18,7 @@
 #include <unordered_map>
 #include <iomanip>
 
-#include "Robot.hpp"
+#include "travesim_webots/robot.hpp"
 
 #include "travesim_webots/message.hpp"
 
@@ -60,7 +60,8 @@ int main(int argc, char** argv) {
     uint32_t multicast_port = std::stoi(argv[8]);
 
     bool specific_source = true;
-    travesim::TeamsFormation teams_formation = travesim::THREE_ROBOTS_PER_TEAM;
+    const travesim::TeamsFormation teams_formation = travesim::THREE_ROBOTS_PER_TEAM;
+    const size_t robots_per_team = static_cast<size_t>(teams_formation);
 
     std::cout << "Referee addr: " << referee_address_str << std::endl;
     std::cout << "Referee port: " << referee_port << std::endl;
@@ -87,7 +88,7 @@ int main(int argc, char** argv) {
 
     travesim::proto::TeamReceiver blue_receiver(blue_address_str,
                                                 blue_port,
-                                                true,
+                                                false,
                                                 specific_source,
                                                 teams_formation);
 
@@ -117,27 +118,61 @@ int main(int argc, char** argv) {
 
     uint32_t frame = 0;
 
-    auto yellow_robot = travesim::webots_adapter::Robot(robots->at("YellowRobot0"));
+    std::array<travesim::webots_adapter::Robot, robots_per_team> yellow_robots;
+    std::array<travesim::webots_adapter::Robot, robots_per_team> blue_robots;
+
+    for (size_t i = 0; i < robots_per_team; i++){
+        std::string yellow_robot_name = "YellowRobot" + std::to_string(i);
+        std::string blue_robot_name = "BlueRobot" + std::to_string(i);
+
+        yellow_robots[i] = travesim::webots_adapter::Robot(robots->at(yellow_robot_name));
+        blue_robots[i] = travesim::webots_adapter::Robot(robots->at(blue_robot_name));
+    }
 
     while (referee->step(time_step) != -1){
-        field_state.yellow_team[0].position = yellow_robot.get_position2d();
-        field_state.yellow_team[0].angular_position = yellow_robot.get_yaw();
+        /**
+         * Send world info to teams
+         */
+
+        for (size_t i = 0; i < robots_per_team; i++){
+            field_state.yellow_team[i].position = yellow_robots[i].get_position2d();
+            field_state.yellow_team[i].angular_position = yellow_robots[i].get_yaw();
+
+            field_state.blue_team[i].position = blue_robots[i].get_position2d();
+            field_state.blue_team[i].angular_position = blue_robots[i].get_yaw();
+        }
 
         vision_sender.send(&field_state);
 
-        std::cout << "Angular position: " << yellow_robot.get_yaw() / 3.1416 * 180 << std::endl;
+        /**
+         * Wait for teams to send a command
+         */
 
         yellow_receiver.receive(&yellow_command);
+        blue_receiver.receive(&blue_command);
+
+        /**
+         * Relay command to robots
+         */
 
         frame++;
 
-        travesim::webots_adapter::message_t message;
+        travesim::webots_adapter::message_t<robots_per_team> yellow_message;
+        travesim::webots_adapter::message_t<robots_per_team> blue_message;
 
-        message.frame = frame;
-        message.left_speed = yellow_command.robot_command[0].left_speed;
-        message.right_speed = yellow_command.robot_command[0].right_speed;
+        yellow_message.frame = frame;
+        blue_message.frame = frame;
 
-        yellow_team_emitter->send(&message, sizeof(message));
+        for (size_t i = 0; i < robots_per_team; i++){
+            yellow_message.left_speed[i] = yellow_command.robot_command[i].left_speed;
+            yellow_message.right_speed[i] = yellow_command.robot_command[i].right_speed;
+
+            blue_message.left_speed[i] = blue_command.robot_command[i].left_speed;
+            blue_message.right_speed[i] = blue_command.robot_command[i].right_speed;
+        }
+
+        yellow_team_emitter->send(&yellow_message, sizeof(yellow_message));
+        blue_team_emitter->send(&blue_message, sizeof(blue_message));
     }
 
     return 0;
