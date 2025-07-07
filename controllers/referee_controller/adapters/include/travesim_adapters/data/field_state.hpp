@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <iostream>
+#include <cstdint>
 
 #include "travesim_adapters/data/data_common.hpp"
 #include "travesim_adapters/data/entity_state.hpp"
