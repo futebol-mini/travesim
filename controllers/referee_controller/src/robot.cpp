@@ -1,6 +1,6 @@
 #include <array>
 #include <cmath>
-#include "Robot.hpp"
+#include "travesim_webots/robot.hpp"
 
 std::array<double, 3> travesim::webots_adapter::Robot::get_position() {
     const double* position = this->robot_ptr->getPosition();

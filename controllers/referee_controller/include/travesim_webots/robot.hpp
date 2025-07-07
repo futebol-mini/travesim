@@ -9,6 +9,8 @@ class Robot {
     public:
         Robot(webots::Node* robot_ptr) : robot_ptr(robot_ptr) { };
 
+        Robot() : robot_ptr(nullptr) { };
+
         std::array<double, 3> get_position();
 
         travesim::Vector2D get_position2d();
