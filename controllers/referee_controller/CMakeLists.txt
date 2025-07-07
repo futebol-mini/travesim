@@ -31,6 +31,7 @@ include_directories(
 
     include
     adapters/include
+    ..common/include
 )
 
 add_executable(referee_controller

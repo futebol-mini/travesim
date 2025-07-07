@@ -66,6 +66,7 @@
 ###-----------------------------------------------------------------------------
 
 WEBOTS_HOME ?= /usr/local/webots
+INCLUDE = ..common/include
 
 ### Do not modify: this includes Webots global Makefile.include
 null :=

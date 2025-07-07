@@ -67,5 +67,9 @@
 
 all:
 	mkdir -p build
-	cmake -S . -B build
+	cd build; cmake ..
 	+make -C build
+
+clean:
+	rm -r build
+
