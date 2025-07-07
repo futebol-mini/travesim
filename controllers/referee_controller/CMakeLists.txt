@@ -31,7 +31,7 @@ include_directories(
 
     include
     adapters/include
-    ..common/include
+    ../common/include
 )
 
 add_executable(referee_controller
@@ -52,4 +52,17 @@ target_link_libraries(referee_controller
 # Copy the target executable at the right location.
 add_custom_command(TARGET referee_controller POST_BUILD COMMAND ${CMAKE_COMMAND} -E
   copy ${CMAKE_BINARY_DIR}/referee_controller ${CMAKE_SOURCE_DIR}
+)
+
+###############################################################################
+# Test files
+###############################################################################
+
+add_executable(command_sender
+  test/command_sender.test.cpp
+)
+
+target_link_libraries(command_sender
+  travesim_adapters_protobuf_comm
+  pb_msgs_lib
 )
