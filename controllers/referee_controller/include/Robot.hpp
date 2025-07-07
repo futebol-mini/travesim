@@ -3,12 +3,11 @@
 
 #include "travesim_adapters/data/entity_state.hpp"
 
-namespace vss
-{
-    class Robot
-    {
+namespace travesim {
+namespace webots_adapter {
+class Robot {
     public:
-        Robot(webots::Node *robot_ptr) : robot_ptr(robot_ptr) {};
+        Robot(webots::Node* robot_ptr) : robot_ptr(robot_ptr) { };
 
         std::array<double, 3> get_position();
 
@@ -17,6 +16,7 @@ namespace vss
         double get_yaw();
 
     private:
-        webots::Node *robot_ptr;
-    };
+        webots::Node* robot_ptr;
+};
+}
 };
