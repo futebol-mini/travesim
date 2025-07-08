@@ -7,7 +7,7 @@
 namespace travesim {
 namespace webots_adapter {
 template <uint8_t size>
-using message_t = struct {
+struct message_t {
     uint32_t frame;
     double   left_speed[size];
     double   right_speed[size];
