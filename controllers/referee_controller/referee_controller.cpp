@@ -26,7 +26,7 @@
 #include "travesim_adapters/protobuf/vision_sender.hpp"
 #include "travesim_adapters/data/field_state.hpp"
 
-std::shared_ptr<std::unordered_map<std::string, webots::Node*>> get_robots_references(webots::Field* children) {
+inline std::shared_ptr<std::unordered_map<std::string, webots::Node*>> get_robots_references(webots::Field* children) {
     auto entities = std::make_shared<std::unordered_map<std::string, webots::Node*>>();
     auto count = children->getCount();
 
@@ -40,6 +40,13 @@ std::shared_ptr<std::unordered_map<std::string, webots::Node*>> get_robots_refer
     }
 
     return entities;
+}
+
+inline void convert_to_entity_state(travesim::EntityState& output, travesim::webots_adapter::Robot& input) {
+    output.position = input.get_position2d();
+    output.angular_position = input.get_yaw();
+    output.velocity = input.get_linear_velocity();
+    output.angular_velocity = input.get_angular_velocity();
 }
 
 int main(int argc, char** argv) {
@@ -121,6 +128,8 @@ int main(int argc, char** argv) {
     std::array<travesim::webots_adapter::Robot, robots_per_team> yellow_robots;
     std::array<travesim::webots_adapter::Robot, robots_per_team> blue_robots;
 
+    travesim::webots_adapter::Robot ball(robots->at("VssBall"));
+
     for (size_t i = 0; i < robots_per_team; i++){
         std::string yellow_robot_name = "YellowRobot" + std::to_string(i);
         std::string blue_robot_name = "BlueRobot" + std::to_string(i);
@@ -135,12 +144,11 @@ int main(int argc, char** argv) {
          */
 
         for (size_t i = 0; i < robots_per_team; i++){
-            field_state.yellow_team[i].position = yellow_robots[i].get_position2d();
-            field_state.yellow_team[i].angular_position = yellow_robots[i].get_yaw();
-
-            field_state.blue_team[i].position = blue_robots[i].get_position2d();
-            field_state.blue_team[i].angular_position = blue_robots[i].get_yaw();
+            convert_to_entity_state(field_state.yellow_team[i], yellow_robots[i]);
+            convert_to_entity_state(field_state.blue_team[i], blue_robots[i]);
         }
+
+        convert_to_entity_state(field_state.ball, ball);
 
         vision_sender.send(&field_state);
 
