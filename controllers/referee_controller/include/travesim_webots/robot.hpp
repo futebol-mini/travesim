@@ -15,6 +15,10 @@ class Robot {
 
         travesim::Vector2D get_position2d();
 
+        travesim::Vector2D get_linear_velocity();
+
+        double get_angular_velocity();
+
         double get_yaw();
 
     private:
