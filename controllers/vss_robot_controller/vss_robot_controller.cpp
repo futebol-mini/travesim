@@ -17,8 +17,6 @@
 
 #include "travesim_webots/message.hpp"
 
-#include "travesim_adapters/data/field_state.hpp"
-
 // This is the main program of your controller.
 // It creates an instance of your Robot instance, launches its
 // function(s) and destroys it at the end of the execution.
@@ -33,8 +31,7 @@ int main(int argc, char** argv) {
     // get the time step of the current world.
     int timeStep = (int) robot->getBasicTimeStep();
 
-    const travesim::TeamsFormation teams_formation = travesim::THREE_ROBOTS_PER_TEAM;
-    const size_t robots_per_team = static_cast<size_t>(teams_formation);
+    const size_t robots_per_team = 3;
 
     // You should insert a getDevice-like function in order to get the
     // instance of a device of the robot. Something like:
