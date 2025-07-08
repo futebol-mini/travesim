@@ -36,7 +36,7 @@ include_directories(
 
 add_executable(referee_controller
     referee_controller.cpp
-    src/Robot.cpp
+    src/robot.cpp
 )
 
 target_link_directories(referee_controller PUBLIC
