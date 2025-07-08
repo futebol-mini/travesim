@@ -17,9 +17,10 @@ PROTO GenericVssRobot [
   field  SFBool      supervisor             FALSE              # Is `Robot.supervisor`.
   field  SFBool      synchronization        TRUE               # Is `Robot.synchronization`.
   field  SFBool      selfCollision          FALSE              # Is `Robot.selfCollision`.
-  field  SFColor     teamColor              0 0 1              # Default orange (RGB, 0-1 range)
-  field  SFColor     robotPrimaryColor      1 0 0              # Default orange (RGB, 0-1 range)
-  field  SFColor     robotSecondaryColor    0 1 0              # Default orange (RGB, 0-1 range)
+  field  SFColor     teamColor              0.0 0.0 1.0        # RGB, 0-1 range
+  field  SFColor     robotPrimaryColor      1.0 0.0 0.0        # RGB, 0-1 range
+  field  SFColor     robotSecondaryColor    0.0 1.0 0.0        # RGB, 0-1 range
+  field  SFColor     bodyColor              0.5 0.5 0.5        # RGB, 0-1 range
 ]
 {
   %<
@@ -40,22 +41,57 @@ PROTO GenericVssRobot [
     synchronization IS synchronization
     selfCollision IS selfCollision
     children [
-      Shape {
-        appearance PBRAppearance {
-          baseColor 0.500000 0.500000 0.500000
-          roughness 1.000000
-          metalness 0
-        }
-        geometry DEF base_link Mesh {
-          url "meshes/base_link.stl"
-        }
+      Transform {
+        translation 0 0 0.03
+        children [
+          Shape {
+            appearance PBRAppearance {
+              baseColor IS bodyColor
+              roughness 1.000000
+              metalness 0
+            }
+            geometry Box {
+              size 0.055 0.05 0.06
+            }
+          }
+          Transform {
+            translation 0 0.03125 0
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor IS bodyColor
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry Box {
+                  size 0.075 0.0125 0.06
+                }
+              }
+            ]
+          }
+          Transform {
+            translation 0 -0.03125 0
+            children [
+              Shape {
+                appearance PBRAppearance {
+                  baseColor IS bodyColor
+                  roughness 1.000000
+                  metalness 0
+                }
+                geometry Box {
+                  size 0.075 0.0125 0.06
+                }
+              }
+            ]
+          }
+        ]
       }
       Solid {
         translation 0.000000 0.000000 0.061000
         children [
           Shape {
             appearance PBRAppearance {
-              baseColor 0.500000 0.500000 0.500000
+              baseColor IS bodyColor
               roughness 1.000000
               metalness 0
             }
@@ -78,15 +114,8 @@ PROTO GenericVssRobot [
               }
             ]
             name "team_blob_link"
-            # physics Physics {
-            #   density -1
-            #   mass 0.010000
-            #   centerOfMass [ 0.000000 0.000000 0.000000 ]
-            #   inertiaMatrix [
-            #     6.000000e-06 6.000000e-06 1.000000e-05
-            #     0.000000e+00 0.000000e+00 0.000000e+00
-            #   ]
-            # }
+            boundingObject NULL
+            physics NULL
           }
           Solid {
             translation -0.017500 0.017500 0.002000
@@ -140,15 +169,8 @@ PROTO GenericVssRobot [
           }
         ]
         name "chapeu_link"
-        # physics Physics {
-        #   density -1
-        #   mass 0.012087
-        #   centerOfMass [ 0.000000 -0.000000 0.061000 ]
-        #   inertiaMatrix [
-        #     6.290300e-06 5.669800e-06 1.195200e-05
-        #     2.303900e-22 -2.908400e-23 -3.724700e-24
-        #   ]
-        # }
+        boundingObject NULL
+        physics NULL
       }
       Solid {
         children [
@@ -170,15 +192,8 @@ PROTO GenericVssRobot [
         ]
         name "parede_dir_link"
         contactMaterial "parede_dir"
-        # physics Physics {
-        #   density -1
-        #   mass 0.009180
-        #   centerOfMass [ 0.000000 -0.038500 0.030000 ]
-        #   inertiaMatrix [
-        #     2.757100e-06 7.057100e-06 4.306200e-06
-        #     -2.531200e-23 0.000000e+00 0.000000e+00
-        #   ]
-        # }
+        boundingObject NULL
+        physics NULL
       }
       Solid {
         children [
@@ -200,15 +215,8 @@ PROTO GenericVssRobot [
         ]
         name "parede_esq_link"
         contactMaterial "parede_esq"
-        # physics Physics {
-        #   density -1
-        #   mass 0.009180
-        #   centerOfMass [ 0.000000 0.038500 0.030000 ]
-        #   inertiaMatrix [
-        #     2.757100e-06 7.057100e-06 4.306200e-06
-        #     -8.765800e-24 -2.159900e-22 3.112000e-24
-        #   ]
-        # }
+        boundingObject NULL
+        physics NULL
       }
       HingeJoint {
         jointParameters HingeJointParameters {
@@ -338,9 +346,37 @@ PROTO GenericVssRobot [
       }
     ]
     contactMaterial "base_mat"
-    boundingObject DEF base_link_col Mesh {
-      url "meshes/base_link_col.stl"
+    boundingObject Group{
+      children [
+        Transform {
+          translation 0 0 0.03
+          children [
+            Box {
+              size 0.055 0.05 0.06
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.03125 0.03
+          children [
+            Box {
+              size 0.075 0.0125 0.06
+            }
+          ]
+        }
+        Transform {
+          translation 0 -0.03125 0.03
+          children [
+            Box {
+              size 0.075 0.0125 0.06
+            }
+          ]
+        }
+      ]
     }
+    # DEF base_link_col Mesh {
+    #   url "meshes/base_link_col.stl"
+    # }
     physics Physics {
       density -1
       mass 0.113374
