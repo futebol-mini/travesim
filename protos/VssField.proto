@@ -58,7 +58,7 @@ PROTO VssField [
         ]
       }
     ]
-    
+
     # Correct bounding object definition
     boundingObject Group {
       children [
@@ -79,7 +79,7 @@ PROTO VssField [
         }
       ]
     }
-    
+
     physics NULL  # Makes the field static
   }
 }
