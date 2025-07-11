@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
     std::string multicast_addr_str(argv[7]);
     uint32_t multicast_port = std::stoi(argv[8]);
 
-    bool specific_source = true;
+    bool specific_source = false;
     const travesim::TeamsFormation teams_formation = travesim::THREE_ROBOTS_PER_TEAM;
     const size_t robots_per_team = static_cast<size_t>(teams_formation);
 
