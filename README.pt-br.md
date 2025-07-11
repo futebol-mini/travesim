@@ -3,20 +3,15 @@
 
 <p align="center">
 
-<img src="https://forthebadge.com/images/badges/built-with-science.svg" href="https://forthebadge.com"/>
-<img src="https://forthebadge.com/images/badges/license-mit.svg" href="./LICENSE.md"/>
-
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <img src="https://img.shields.io/badge/all_contributors-11-orange.svg?style=for-the-badge" href="#-contributors"/>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-</p>
+This project is the spiritual successor of the [classic Travesim](https://github.com/ThundeRatz/travesim)
 
 ## 📷 Screenshots
 
 ## 🎈 Intro
-
-This project is the spiritual successor of the [classic Travesim](https://github.com/ThundeRatz/travesim)
 
 ## ➕ Dependencies
 
