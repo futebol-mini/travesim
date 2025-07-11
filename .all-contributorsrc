@@ -1,0 +1,130 @@
+{
+  "projectName": "travesim",
+  "projectOwner": "futebol-mini",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md",
+    "README.pt-br.md"
+  ],
+  "badgeTemplate": "<img src=\"https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=for-the-badge\" href=\"#-contributors\"/>",
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "gitmoji",
+  "contributors": [
+    {
+      "login": "FelipeGdM",
+      "name": "Felipe Gomes de Melo",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1054087?v=4",
+      "profile": "https://github.com/FelipeGdM",
+      "contributions": [
+        "doc",
+        "review",
+        "code",
+        "translation"
+      ]
+    },
+    {
+      "login": "LucasHaug",
+      "name": "Lucas Haug",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/39196309?v=4",
+      "profile": "https://github.com/LucasHaug",
+      "contributions": [
+        "review",
+        "code",
+        "translation",
+        "doc"
+      ]
+    },
+    {
+      "login": "Tocoquinho",
+      "name": "tocoquinho",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/37677881?v=4",
+      "profile": "https://github.com/Tocoquinho",
+      "contributions": [
+        "ideas",
+        "doc"
+      ]
+    },
+    {
+      "login": "Berbardo",
+      "name": "Bernardo Coutinho",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/48636340?v=4",
+      "profile": "https://github.com/Berbardo",
+      "contributions": [
+        "review",
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "lucastrschneider",
+      "name": "Lucas Schneider",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/50970346?v=4",
+      "profile": "https://github.com/lucastrschneider",
+      "contributions": [
+        "review",
+        "code",
+        "translation",
+        "doc"
+      ]
+    },
+    {
+      "login": "JuliaMdA",
+      "name": "Júlia Mello",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/65100162?v=4",
+      "profile": "https://github.com/JuliaMdA",
+      "contributions": [
+        "design",
+        "data"
+      ]
+    },
+    {
+      "login": "ThallesCarneiro",
+      "name": "ThallesCarneiro",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/71659373?v=4",
+      "profile": "https://github.com/ThallesCarneiro",
+      "contributions": [
+        "design",
+        "data"
+      ]
+    },
+    {
+      "login": "TetsuoTakahashi",
+      "name": "TetsuoTakahashi",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/38441802?v=4",
+      "profile": "https://github.com/TetsuoTakahashi",
+      "contributions": [
+        "ideas"
+      ]
+    },
+    {
+      "login": "GabrielCosme",
+      "name": "Gabriel Cosme Barbosa",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/62270066?v=4",
+      "profile": "https://github.com/GabrielCosme",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "RicardoHonda",
+      "name": "RicardoHonda",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/62343088?v=4",
+      "profile": "https://github.com/RicardoHonda",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "leticiakimoto",
+      "name": "leticiakimoto",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/62733251?v=4",
+      "profile": "https://github.com/leticiakimoto",
+      "contributions": [
+        "review"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
