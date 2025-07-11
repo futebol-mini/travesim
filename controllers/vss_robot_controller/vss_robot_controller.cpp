@@ -43,8 +43,6 @@ int main(int argc, char** argv) {
 
     uint32_t robot_number = std::stoi(argv[2]);
 
-    std::cout << "Team name: " << team_name << " Number: " << robot_number << std::endl;
-
     webots::Receiver* receiver = robot->getReceiver("robot_receiver");
 
     if (!receiver){
