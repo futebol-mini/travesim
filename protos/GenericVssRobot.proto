@@ -244,7 +244,7 @@ PROTO GenericVssRobot [
               children [
                 Shape {
                   appearance PBRAppearance {
-                    baseColor 0.500000 0.500000 0.500000
+                    baseColor 0.0 0.8 0.0
                     roughness 1.000000
                     metalness 0
                   }
@@ -305,7 +305,7 @@ PROTO GenericVssRobot [
               children [
                 Shape {
                   appearance PBRAppearance {
-                    baseColor 0.500000 0.500000 0.500000
+                    baseColor 0.0 0.8 0.0
                     roughness 1.000000
                     metalness 0
                   }
