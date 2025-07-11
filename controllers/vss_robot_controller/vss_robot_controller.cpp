@@ -4,9 +4,6 @@
 // Author:
 // Modifications:
 
-// You may need to add webots include files such as
-// <webots/DistanceSensor.hpp>, <webots/Motor.hpp>, etc.
-// and/or to add some other includes
 #include <webots/Robot.hpp>
 #include <webots/Receiver.hpp>
 #include <webots/Motor.hpp>
@@ -14,16 +11,20 @@
 #include <memory>
 #include <algorithm> // Required for std::transform
 #include <cctype>    // Required for std::tolower
+#include <cmath>
 
 #include "travesim_webots/message.hpp"
 
-// This is the main program of your controller.
-// It creates an instance of your Robot instance, launches its
-// function(s) and destroys it at the end of the execution.
-// Note that only one instance of Robot should be created in
-// a controller program.
-// The arguments of the main function can be specified by the
-// "controllerArgs" field of the Robot node
+#define MAX_SPEED 68.0
+
+inline double sign(double in) {
+    return (std::signbit(in) ? -1.0 : 1.0);
+}
+
+inline double clip(double in) {
+    return std::min(std::abs(in), MAX_SPEED)*sign(in);
+}
+
 int main(int argc, char** argv) {
     // create the Robot instance.
     auto robot = std::make_unique<webots::Robot>();
@@ -32,12 +33,6 @@ int main(int argc, char** argv) {
     int timeStep = (int) robot->getBasicTimeStep();
 
     const size_t robots_per_team = 3;
-
-    // You should insert a getDevice-like function in order to get the
-    // instance of a device of the robot. Something like:
-    // Motor *motor = robot->getMotor("motorname");
-    // DistanceSensor *ds = robot->getDistanceSensor("dsname");
-    // ds->enable(timeStep);
 
     std::string team_name = argv[1];
     std::transform(team_name.begin(), team_name.end(), team_name.begin(),
@@ -76,12 +71,8 @@ int main(int argc, char** argv) {
         auto message = *(travesim::webots_adapter::message_t<robots_per_team>*) receiver->getData();
         receiver->nextPacket();
 
-        std::cout << "Received frame: " << message.frame << std::endl;
-        std::cout << "Received L vel: " << message.left_speed[robot_number] << std::endl;
-        std::cout << "Received R vel: " << message.right_speed[robot_number] << std::endl;
-
-        left_motor->setVelocity(message.left_speed[robot_number]);
-        right_motor->setVelocity(message.right_speed[robot_number]);
+        left_motor->setVelocity(clip(message.left_speed[robot_number]));
+        right_motor->setVelocity(clip(message.right_speed[robot_number]));
     }
 
     // Enter here exit cleanup code.
