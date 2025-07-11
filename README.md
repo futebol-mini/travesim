@@ -14,6 +14,10 @@
 
 ## 📷 Screenshots
 
+<p align="center">
+  <img height=200px src="./docs/Match3v3.png" />
+</p>
+
 ## 🎈 Intro
 
 This project is the spiritual successor of the [classic Travesim](https://github.com/ThundeRatz/travesim)
