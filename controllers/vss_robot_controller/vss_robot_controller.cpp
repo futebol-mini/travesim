@@ -26,6 +26,15 @@ inline double clip(double in) {
 }
 
 int main(int argc, char** argv) {
+    std::string team_name(argv[1]);
+    uint32_t robot_number = std::stoi(argv[2]);
+
+    std::transform(team_name.begin(), team_name.end(), team_name.begin(),
+                   [](u_char c)
+    {
+        return std::tolower(c);
+    });
+
     // create the Robot instance.
     auto robot = std::make_unique<webots::Robot>();
 
@@ -34,22 +43,20 @@ int main(int argc, char** argv) {
 
     const size_t robots_per_team = 3;
 
-    std::string team_name = argv[1];
-    std::transform(team_name.begin(), team_name.end(), team_name.begin(),
-                   [](u_char c)
-    {
-        return std::tolower(c);
-    });
-
-    uint32_t robot_number = std::stoi(argv[2]);
-
     webots::Receiver* receiver = robot->getReceiver("robot_receiver");
 
     if (!receiver){
         std::exit(6);
     }
 
-    receiver->setChannel(0);
+    if (team_name.compare("yellow")){
+        receiver->setChannel(1);
+    } else if (team_name.compare("blue")) {
+        receiver->setChannel(0);
+    } else {
+        std::cerr << "Invalid team name! Got: '"<< team_name << "'" << std::endl;
+    }
+
     receiver->enable(1);
 
     webots::Motor* left_motor = robot->getMotor("left_motor");
