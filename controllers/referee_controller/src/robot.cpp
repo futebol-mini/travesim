@@ -27,4 +27,18 @@ double Robot::get_angular_velocity() {
     const double* velocity = this->robot_ptr->getVelocity();
     return velocity[5];
 }
+
+void Robot::set_position(double x, double y, double z) {
+    const double position[] = {x, y, z};
+    this->robot_ptr->getField("translation")->setSFVec3f(position);
+}
+
+void Robot::set_yaw(double angle) {
+    const double rotation[] = {0.0, 0.0, 1.0, angle};
+    this->robot_ptr->getField("rotation")->setSFRotation(rotation);
+}
+
+void Robot::stop() {
+    this->robot_ptr->resetPhysics();
+}
 }

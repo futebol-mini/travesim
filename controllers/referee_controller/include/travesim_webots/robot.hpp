@@ -21,6 +21,12 @@ class Robot {
 
         double get_yaw();
 
+        void set_position(double x, double y, double z);
+
+        void set_yaw(double angle);
+
+        void stop();
+
     private:
         webots::Node* robot_ptr;
 };

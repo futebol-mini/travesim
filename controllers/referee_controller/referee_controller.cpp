@@ -22,9 +22,12 @@
 
 #include "travesim_webots/message.hpp"
 
+#include "travesim_adapters/protobuf/replacer_receiver.hpp"
 #include "travesim_adapters/protobuf/team_receiver.hpp"
 #include "travesim_adapters/protobuf/vision_sender.hpp"
 #include "travesim_adapters/data/field_state.hpp"
+
+#define DEFAULT_Z_M 0.002 // 2mm
 
 inline std::shared_ptr<std::unordered_map<std::string, webots::Node*>> get_robots_references(webots::Field* children) {
     auto entities = std::make_shared<std::unordered_map<std::string, webots::Node*>>();
@@ -47,6 +50,10 @@ inline void convert_to_entity_state(travesim::EntityState& output, travesim::web
     output.angular_position = input.get_yaw();
     output.velocity = input.get_linear_velocity();
     output.angular_velocity = input.get_angular_velocity();
+}
+
+inline std::string build_name_from_team_number(bool is_yellow, uint8_t number) {
+    return std::string(is_yellow ? "Yellow":"Blue") + std::string("Robot") + std::to_string(number);
 }
 
 int main(int argc, char** argv) {
@@ -101,6 +108,9 @@ int main(int argc, char** argv) {
 
     travesim::TeamCommand blue_command(teams_formation);
 
+    travesim::proto::ReplacerReceiver referee_receiver(referee_address_str, referee_port, specific_source);
+    std::queue<std::shared_ptr<travesim::EntityState>> states_queue;
+
     /**
      * Webots interfaces definitions
      */
@@ -139,6 +149,40 @@ int main(int argc, char** argv) {
     }
 
     while (referee->step(time_step) != -1){
+        /**
+         * Process messages from referee
+         */
+
+        bool received_new_msg = referee_receiver.receive(&states_queue);
+
+        if (received_new_msg) {
+            referee->simulationSetMode(webots::Supervisor::SIMULATION_MODE_PAUSE);
+
+            while (!states_queue.empty()) {
+                if (std::dynamic_pointer_cast<travesim::RobotState>(states_queue.front()) != nullptr) {
+                    // Incoming state is a robot state
+                    auto state = std::dynamic_pointer_cast<travesim::RobotState>(states_queue.front());
+
+                    auto& team_array = (state->is_yellow ? yellow_robots : blue_robots);
+
+                    team_array[state->id].set_position(state->position.x, state->position.y, DEFAULT_Z_M);
+                    team_array[state->id].set_yaw(state->angular_position);
+                    team_array[state->id].stop();
+                } else {
+                    // Incoming state is an entity state (ball)
+                    auto state = std::dynamic_pointer_cast<travesim::EntityState>(states_queue.front());
+
+                    ball.set_position(state->position.x, state->position.y, DEFAULT_Z_M);
+                    ball.set_yaw(state->angular_position);
+                    ball.stop();
+                }
+
+                states_queue.pop();
+            }
+
+            referee->simulationSetMode(webots::Supervisor::SIMULATION_MODE_REAL_TIME);
+        }
+
         /**
          * Send world info to teams
          */
