@@ -12,6 +12,19 @@
 
 </p>
 
+<!-- TOC -->
+
+- [📷 Screenshots](#-screenshots)
+- [🎈 Intro](#-intro)
+- [➕ Dependencies](#-dependencies)
+- [📣 Interface](#-interface)
+- [📏 Used models](#-used-models)
+- [📁 Folder structure](#-folder-structure)
+- [📝 Contributing](#-contributing)
+- [✨ Contributors](#-contributors)
+
+<!-- /TOC -->
+
 ## 📷 Screenshots
 
 <p align="center">
