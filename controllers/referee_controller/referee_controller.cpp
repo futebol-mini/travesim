@@ -13,10 +13,8 @@
 #include <webots/Emitter.hpp>
 #include <memory>
 #include <array>
-#include <span>
 #include <iostream>
 #include <unordered_map>
-#include <iomanip>
 
 #include "travesim_webots/robot.hpp"
 
