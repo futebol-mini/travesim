@@ -4,8 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "${env:WEBOTS_HOME}",
-                "/usr/local/webots/include/controller/cpp",
+                "${env:WEBOTS_HOME}/include/controller/cpp",
                 "${workspaceFolder}/controllers/referee_controller/adapters/include"
             ],
             "defines": [],
