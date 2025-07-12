@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.wbt": "webots-proto",
+    },
+    "editor.formatOnSave": true
+}
