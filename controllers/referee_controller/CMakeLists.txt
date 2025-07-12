@@ -6,6 +6,8 @@ project(referee_controller CXX)
 
 add_subdirectory(adapters)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
+
 if(NOT DEFINED ENV{WEBOTS_HOME})
   if(WIN32)
     set(ENV{WEBOTS_HOME} "C:\\Program Files\\Webots")
@@ -21,7 +23,7 @@ else()
 endif()
 
 set(LIBRARIES
-    ${CMAKE_SHARED_LIBRARY_PREFIX}Controller${CMAKE_SHARED_LIBRARY_SUFFIX} 
+    ${CMAKE_SHARED_LIBRARY_PREFIX}Controller${CMAKE_SHARED_LIBRARY_SUFFIX}
     ${CMAKE_SHARED_LIBRARY_PREFIX}CppController${CMAKE_SHARED_LIBRARY_SUFFIX}
 )
 
