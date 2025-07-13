@@ -20,8 +20,11 @@
 - [📷 Screenshots](#-screenshots)
 - [🎈 Intro](#-intro)
 - [➕ Dependencies](#-dependencies)
-- [📣 Interface](#-interface)
+- [🌎 Worlds](#-worlds)
+- [📣 Communication](#-communication)
 - [📏 Used models](#-used-models)
+  - [📜 Main parameters](#-main-parameters)
+  - [⚙️ Motor parameters](#️-motor-parameters)
 - [📁 Folder structure](#-folder-structure)
 - [📝 Contributing](#-contributing)
 - [✨ Contributors](#-contributors)
@@ -38,6 +41,8 @@
 
 This project is the spiritual successor of the [classic Travesim](https://github.com/ThundeRatz/travesim)
 
+The environment is built upon [Webots](https://cyberbotics.com/), an open source general purpouse robotics simulator
+
 ## ➕ Dependencies
 
 Install [Webots](https://cyberbotics.com/doc/guide/installation-procedure#installing-the-debian-package-with-the-advanced-packaging-tool-apt) in your system. For Debian distros, you may run:
@@ -53,6 +58,9 @@ sudo apt update
 sudo apt install -y webots cmake libboost-system-dev libboost-thread-dev protobuf-compiler
 ```
 
+> [!WARNING]
+> If you install Webots with a different method, you need to set `WEBOTS_HOME` environment variable accordingly
+
 Then, clone the repo with:
 
 ```bash
@@ -66,11 +74,58 @@ cd travesim
 make
 ```
 
-## 📣 Interface
+## 🌎 Worlds
+
+In the current version, TraveSim can handle games with 3 robots per team. In the near future we plan to port the field for 5v5 matches.
+
+The worlds currently supported are as follows:
+
+-`Match3v3.wbt` - Base world for 3v3 matches
+-`RobotDev.wbt` - Development world with a single robot
+
+## 📣 Communication
 
 All TraveSim controllers adhere the [VSSProto](https://github.com/futebol-mini/VSSProto) standard
 
 ## 📏 Used models
+
+TraveSim uses the model of a generic VSS robot, defined in `protos/GenericVssRobot.proto`.
+
+Robot's color pattern follows the standard specified in the IEEE Latin American Robotics Competition rules
+
+### 📜 Main parameters
+
+The physical propoerties of the robot where determined from typical materials used in real world robot manufacturing
+
+|         Parameter          |          Value | Unit  |
+| :------------------------: | -------------: | :---- |
+|        Wheel radius        |             25 | mm    |
+|      Wheel thickness       |              8 | mm    |
+|     Wheels separation      |             55 | mm    |
+|       Wheels density       |           1150 | kg/m³ |
+|     Wheels mass (each)     |             18 | g     |
+|      Wheels material       |          Nylon | \-    |
+|       Body material        | 50% infill ABS | \-    |
+|        Body density        |            510 | kg/m³ |
+|        Total height        |             62 | mm    |
+|        Total width         |             78 | mm    |
+|        Total length        |             78 | mm    |
+|         Total mass         |            180 | g     |
+| Total inertia momentum Izz |          0.113 | g m²  |
+
+### ⚙️ Motor parameters
+
+The model's motor is inspired in [Pololu's 50:1 Micro Metal Gearmotor](https://www.pololu.com/product/3073) in order to achieve realistic values.
+
+|           Parameter            | Value | Unit   |
+| :----------------------------: | ----: | :----- |
+|        Motor max torque        |    73 | mN m   |
+| Robot max linear acceleration  |    16 | m/s²   |
+| Robot max angular acceleration |  1420 | rad/s² |
+|        Motor max speed         |   650 | RPM    |
+|        Motor max speed         |   68  | rad/s  |
+|     Robot max linear speed     |   1.7 | m/s    |
+|    Robot max angular speed     |   9.8 | rad/s  |
 
 ## 📁 Folder structure
 

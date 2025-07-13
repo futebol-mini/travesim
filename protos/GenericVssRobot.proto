@@ -269,13 +269,7 @@ PROTO GenericVssRobot [
             ]
           }
           physics Physics {
-            density -1
-            mass 0.018064
-            centerOfMass [ 0.000000 0.004000 0.000000 ]
-            inertiaMatrix [
-              2.918900e-06 5.645000e-06 2.918900e-06
-              -3.490800e-39 2.155900e-38 4.993400e-39
-            ]
+            density 1150
           }
         }
       }
@@ -330,13 +324,7 @@ PROTO GenericVssRobot [
             ]
           }
           physics Physics {
-            density -1
-            mass 0.018064
-            centerOfMass [ 0.000000 -0.004000 0.000000 ]
-            inertiaMatrix [
-              2.918900e-06 5.645000e-06 2.918900e-06
-              -3.490800e-39 2.155900e-38 -1.027400e-38
-            ]
+            density 1150
           }
         }
       }
