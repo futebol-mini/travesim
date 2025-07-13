@@ -1,12 +1,15 @@
-// File:          referee_controller.cpp
-// Date:
-// Description:
-// Author:
-// Modifications:
+/**
+ * @file referee_controller.cpp
+ *
+ * @author Felipe Gomes de Melo <felipegmelo.42@gmail.com>
+ *
+ * @brief
+ *
+ * @date 07/2025
+ *
+ * @copyright MIT License - Copyright (c) 2025 Futebol Mini
+ */
 
-// You may need to add webots include files such as
-// <webots/DistanceSensor.hpp>, <webots/Motor.hpp>, etc.
-// and/or to add some other includes
 #include <webots/Robot.hpp>
 #include <webots/Supervisor.hpp>
 #include <webots/Node.hpp>

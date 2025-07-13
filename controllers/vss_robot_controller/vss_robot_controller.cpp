@@ -1,8 +1,14 @@
-// File:          vss_robot_controller.cpp
-// Date:
-// Description:
-// Author:
-// Modifications:
+/**
+ * @file vss_robot_controller.cpp
+ *
+ * @author Felipe Gomes de Melo <felipegmelo.42@gmail.com>
+ *
+ * @brief
+ *
+ * @date 07/2025
+ *
+ * @copyright MIT License - Copyright (c) 2025 Futebol Mini
+ */
 
 #include <webots/Robot.hpp>
 #include <webots/Receiver.hpp>

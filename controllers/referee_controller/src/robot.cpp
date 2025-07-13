@@ -1,3 +1,15 @@
+/**
+ * @file robot.cpp
+ *
+ * @author Felipe Gomes de Melo <felipegmelo@usp.br>
+ *
+ * @brief Inteface class that abstracts webots specific methods
+ *
+ * @date 07/2025
+ *
+ * @copyright MIT License - Copyright (c) 2025 Futebol Mini
+ */
+
 #include <array>
 #include <cmath>
 #include "travesim_webots/robot.hpp"
