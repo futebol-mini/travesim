@@ -16,7 +16,7 @@
 #include "travesim_adapters/udp/unicast_receiver.hpp"
 #include "travesim_adapters/data/entity_state.hpp"
 #include "travesim_adapters/data/robot_state.hpp"
-#include "packet.pb.h"
+#include "replacement.pb.h"
 
 #ifndef __REPLACER_RECEIVER_H__
 #define __REPLACER_RECEIVER_H__

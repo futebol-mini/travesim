@@ -13,6 +13,7 @@
 #include <ros/console.h>
 
 #include "travesim_adapters/protobuf/replacer_receiver.hpp"
+#include "packet.pb.h"
 
 /*****************************************
  * Private Constants
