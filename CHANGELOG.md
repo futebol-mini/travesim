@@ -5,6 +5,12 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.md)
 
+## [Unrealeased]
+
+### Added
+
+- Improve README
+
 ## [25.07.1]
 
 ### Added

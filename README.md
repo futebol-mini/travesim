@@ -43,6 +43,18 @@ This project is the spiritual successor of the [classic Travesim](https://github
 
 The environment is built upon [Webots](https://cyberbotics.com/), an open source general purpouse robotics simulator
 
+In order to init the simulation, run the command:
+
+```bash
+webots <world-file>
+```
+
+To init a 3v3 match:
+
+```bash
+webots worlds/Match3v3.wbt
+```
+
 ## ➕ Dependencies
 
 Install [Webots](https://cyberbotics.com/doc/guide/installation-procedure#installing-the-debian-package-with-the-advanced-packaging-tool-apt) in your system. For Debian distros, you may run:
