@@ -1,21 +1,51 @@
 <h1 align="center">🥅 TraveSim</h1>
-<p align="center">IEEE Very Small Size Soccer simulation project with Webots</p>
+<p align="center">Projeto de simuação de IEEE Very Small Size Soccer com Webots</p>
 
 <p align="center">
 
+<img alt="Science" src="https://img.shields.io/badge/Built_with-Science-orange?style=for-the-badge&labelColor=e46c17&color=d35b09">
+
+<img src="https://img.shields.io/badge/calver-YY.0M.MINOR-blue?style=for-the-badge" href="https://calver.org/" alt="Calver" />
+
+<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" href="./LICENSE.md" alt="License MIT" />
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<img src="https://img.shields.io/badge/all_contributors-11-orange.svg?style=for-the-badge" href="#-contributors"/>
+<img src="https://img.shields.io/badge/all_contributors-11-orange.svg?style=for-the-badge" href="#-contributors" alt="All contributors"/>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
-This project is the spiritual successor of the [classic Travesim](https://github.com/ThundeRatz/travesim)
+</p>
+
+<!-- TOC -->
+
+- [📷 Screenshots](#-screenshots)
+- [🎈 Intro](#-intro)
+- [➕ Dependẽncias](#-dependẽncias)
+- [🌎 Mundos](#-mundos)
+- [📣 Comunicação](#-comunicação)
+- [📏 Modelos utilizados](#-modelos-utilizados)
+  - [📜 Parâmetros principais](#-parâmetros-principais)
+  - [⚙️ Parâmetros dos motores](#️-parâmetros-dos-motores)
+- [📁 Estrutura das pastas](#-estrutura-das-pastas)
+- [📝 Contribuindo](#-contribuindo)
+- [✨ Contribuidores](#-contribuidores)
+
+<!-- /TOC -->
 
 ## 📷 Screenshots
 
+<p align="center">
+  <img height=300px src="./docs/Match3v3.png" alt="Match3v3"/>
+</p>
+
 ## 🎈 Intro
 
-## ➕ Dependencies
+This project is the spiritual successor of the [classic Travesim](https://github.com/ThundeRatz/travesim)
 
-Install [Webots](https://cyberbotics.com/doc/guide/installation-procedure#installing-the-debian-package-with-the-advanced-packaging-tool-apt) in your system. For Debian distros, you may run:
+The environment is built upon [Webots](https://cyberbotics.com/), an open source general purpouse robotics simulator
+
+## ➕ Dependẽncias
+
+Instale [Webots](https://cyberbotics.com/doc/guide/installation-procedure#installing-the-debian-package-with-the-advanced-packaging-tool-apt) no seu sistema. Para distribuições baseadas em Debian, rode os comandos:
 
 ```bash
 sudo mkdir -p /etc/apt/keyrings
@@ -28,32 +58,89 @@ sudo apt update
 sudo apt install -y webots cmake libboost-system-dev libboost-thread-dev protobuf-compiler
 ```
 
-Then, clone the repo with:
+> [!WARNING]
+> Se o Webots for instalado de outra forma, será necessário configurar a variável de ambiente `WEBOTS_HOME` de acordo
+
+Em seguida, clone o repo com:
 
 ```bash
 git clone https://github.com/futebol-mini/travesim.git
 ```
 
-At last, compile the controllers with:
+Por fim, compile os controladores com:
 
 ```bash
 cd travesim
 make
 ```
 
-## 📣 Interface
+## 🌎 Mundos
 
-All TraveSim controllers adhere the [VSSProto](https://github.com/futebol-mini/VSSProto) standard
+Na versão atual, o TraveSim consegue executar jogos com 3 robôs em cada time. No futuro próximo, planejamos migrar o campo para partidas 5v5
 
-## 📏 Used models
+Os seguintes mundos estão implementados:
 
-## 📁 Folder structure
+-`Match3v3.wbt` - Mundo base para partidas 3v3
+-`RobotDev.wbt` - Mundo de desenvolvimento com um único robô
 
-## 📝 Contributing
+## 📣 Comunicação
 
-Any help in the development of robotics is welcome, we encourage you to contribute to the project! To learn how, see the contribution guidelines [here](CONTRIBUTING.md).
+Os controladores do TraveSim seguem o padrão [VSSProto](https://github.com/futebol-mini/VSSProto)
 
-## ✨ Contributors
+## 📏 Modelos utilizados
+
+O TraveSim utiliza um modelo de robô VSS genérico, definido em `protos/GenericVssRobot.proto`
+
+O esquema de cores dos robôs segue o padrão definido nas regras da IEEE Latin American Robotics Competition
+
+### 📜 Parâmetros principais
+
+As propriedades do robô foram determinadas usando materiais típicos usados em robôs do mundo real
+
+|          Parâmetro           |          Valor | Unidade |
+|:----------------------------:|---------------:|:--------|
+|         Raio da roda         |             25 | mm      |
+|      Espessura da roda       |              8 | mm      |
+|     Separação das rodas      |             55 | mm      |
+|     Densidade das rodas      |           1150 | kg/m³   |
+|      Massa de cada roda      |             18 | g       |
+|      Material das rodas      |          Nylon | \-      |
+|      Material do corpo       | 50% infill ABS | \-      |
+|      Densidade do corpo      |            510 | kg/m³   |
+|         Altura total         |             62 | mm      |
+|        Largura total         |             78 | mm      |
+|      Comprimento total       |             78 | mm      |
+|         Massa total          |            180 | g       |
+| Momento de inércia total Izz |          0.113 | g m²    |
+
+### ⚙️ Parâmetros dos motores
+
+O modelo do motor é inspirado no motor [Pololu 50:1 Micro Metal Gearmotor](https://www.pololu.com/product/3073) de modo a obter valures realistas
+
+|             Parâmetro             | Valor | Unidade |
+|:---------------------------------:|------:|:--------|
+|           Torque máximo           |    73 | mN m    |
+| Aceleração linear máxima do robô  |    16 | m/s²    |
+| Aceleração angular máxima do robô |  1420 | rad/s²  |
+|          Rotação máxima           |   650 | RPM     |
+|          Rotação máxima           |    68 | rad/s   |
+| Velocidade linear máxima do robô  |   1.7 | m/s     |
+| Velocidade angular máxima do robô |   9.8 | rad/s   |
+
+## 📁 Estrutura das pastas
+
+- **controllers/** - Pasta de controladores Webots
+  - **common/** - Interfaces comuns a todos os controladores. Estrutura das mensagens enviadas via [Webots emitters](https://www.cyberbotics.com/doc/reference/emitter).
+  - **referee_controller/** - [Webots supervisor](https://www.cyberbotics.com/doc/reference/supervisor) para intermediar comandos dos times e do referee para a simulação.
+  - **vss_robot_controller/** - Controlador individual dos robôs
+- **protos/** - Arquivos [Webots PROTO](https://cyberbotics.com/doc/reference/proto) que descrevem os robôs, o campo e a bola
+- **worlds/** - [Arquivos de mundo Webots](https://cyberbotics.com/doc/reference/webots-world-files) para simulação das partidas
+
+## 📝 Contribuindo
+
+Toda ajuda no desenvolvimento da robótica é bem vinda, nós incentivamos você a contribuir para o projeto! Para saber como, veja as [diretrizes de contribuição](CONTRIBUTING.pt-br.md)
+
+## ✨ Contribuidores
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
