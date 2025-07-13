@@ -6,6 +6,7 @@
         "huntertran.auto-markdown-toc",
         "llvm-vs-code-extensions.vscode-clangd",
         "EditorConfig.EditorConfig",
+        "cschlosser.doxdocgen",
         "zachflower.uncrustify"
     ],
     // List of extensions recommended by VS Code that should not be recommended for users of this workspace.

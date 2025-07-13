@@ -2,5 +2,23 @@
     "files.associations": {
         "*.wbt": "webots-proto",
     },
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "doxdocgen.generic.dateFormat": "MM/YYYY",
+    "doxdocgen.file.copyrightTag": [
+        "@copyright MIT License - Copyright (c) 2025 Futebol Mini"
+    ],
+    "doxdocgen.generic.authorTag": "@author {author} <{email}>",
+    "doxdocgen.generic.useGitUserEmail": true,
+    "doxdocgen.generic.useGitUserName": true,
+    "doxdocgen.file.fileOrder": [
+        "file",
+        "empty",
+        "author",
+        "empty",
+        "brief",
+        "empty",
+        "date",
+        "empty",
+        "copyright",
+    ],
 }
