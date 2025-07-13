@@ -5,6 +5,7 @@
     "recommendations": [
         "huntertran.auto-markdown-toc",
         "llvm-vs-code-extensions.vscode-clangd",
+        "DavidAnson.vscode-markdownlint",
         "EditorConfig.EditorConfig",
         "cschlosser.doxdocgen",
         "zachflower.uncrustify"

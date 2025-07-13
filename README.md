@@ -3,11 +3,12 @@
 
 <p align="center">
 
-<img src="https://forthebadge.com/images/badges/built-with-science.svg" href="https://forthebadge.com"/>
-<img src="https://forthebadge.com/images/badges/license-mit.svg" href="./LICENSE.md"/>
+<img alt="Science" src="https://img.shields.io/badge/Built_with-Science-orange?style=for-the-badge&labelColor=e46c17&color=d35b09">
+
+<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" href="./LICENSE.md" alt="License MIT" />
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-<img src="https://img.shields.io/badge/all_contributors-11-orange.svg?style=for-the-badge" href="#-contributors"/>
+<img src="https://img.shields.io/badge/all_contributors-11-orange.svg?style=for-the-badge" href="#-contributors" alt="All contributors"/>
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </p>
@@ -28,7 +29,7 @@
 ## 📷 Screenshots
 
 <p align="center">
-  <img height=200px src="./docs/Match3v3.png" />
+  <img height=300px src="./docs/Match3v3.png" alt="Match3v3"/>
 </p>
 
 ## 🎈 Intro
@@ -71,9 +72,16 @@ All TraveSim controllers adhere the [VSSProto](https://github.com/futebol-mini/V
 
 ## 📁 Folder structure
 
+- **controllers/** - Webots controllers folder
+  - **common/** - Interfaces common to all controllers. Schema for messages sent via [Webots emitters](https://www.cyberbotics.com/doc/reference/emitter).
+  - **referee_controller/** - [Webots supervisor](https://www.cyberbotics.com/doc/reference/supervisor) to bridge teams and referee commands to the simulation.
+  - **vss_robot_controller/** - Controller of the individual robots.
+- **protos/** - [Webots PROTO files](https://cyberbotics.com/doc/reference/proto) that describe the field, ball and field.
+- **worlds/** - [Webots world files](https://cyberbotics.com/doc/reference/webots-world-files) for match simulation
+
 ## 📝 Contributing
 
-Any help in the development of robotics is welcome, we encourage you to contribute to the project! To learn how, see the contribution guidelines [here](CONTRIBUTING.md).
+Any help in the development of robotics is welcome, we encourage you to contribute to the project! To learn how, see the [contribution guidelines](CONTRIBUTING.md).
 
 ## ✨ Contributors
 
