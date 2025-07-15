@@ -11,6 +11,10 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 
 - Improve README
 
+### Fixed
+
+- Robots now always initialize with zero velocity
+
 ## [25.07.1]
 
 ### Added
