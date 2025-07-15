@@ -65,11 +65,10 @@
 ###
 ###-----------------------------------------------------------------------------
 
-WEBOTS_HOME ?= /usr/local/webots
-INCLUDE = -I"../common/include"
+all:
+	mkdir -p build
+	cd build; cmake ..
+	+make -C build
 
-### Do not modify: this includes Webots global Makefile.include
-null :=
-space := $(null) $(null)
-WEBOTS_HOME_PATH?=$(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
-include $(WEBOTS_HOME_PATH)/resources/Makefile.include
+clean:
+	rm -r build
