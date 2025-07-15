@@ -72,6 +72,9 @@ int main(int argc, char** argv) {
     left_motor->setPosition(std::numeric_limits<double>::infinity());
     right_motor->setPosition(std::numeric_limits<double>::infinity());
 
+    left_motor->setVelocity(0);
+    right_motor->setVelocity(0);
+
     // Main loop:
     // - perform simulation steps until Webots is stopping the controller
     while (robot->step(timeStep) != -1){
