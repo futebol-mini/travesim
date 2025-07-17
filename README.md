@@ -92,8 +92,8 @@ In the current version, TraveSim can handle games with 3 robots per team. In the
 
 The worlds currently supported are as follows:
 
--`Match3v3.wbt` - Base world for 3v3 matches
--`RobotDev.wbt` - Development world with a single robot
+- `Match3v3.wbt` - Base world for 3v3 matches
+- `RobotDev.wbt` - Development world with a single robot
 
 ## 📣 Communication
 
