@@ -21,4 +21,7 @@
         "empty",
         "copyright",
     ],
+    "python.analysis.extraPaths": [
+        "/usr/local/webots"
+    ],
 }
