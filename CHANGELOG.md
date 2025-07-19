@@ -14,6 +14,7 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 ### Fixed
 
 - Robots now always initialize with zero velocity
+- Include missing time info in step fild in vision packets
 
 ## [25.07.1]
 
