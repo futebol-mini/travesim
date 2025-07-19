@@ -79,7 +79,11 @@ size_t Receiver::receive_latest(char* buffer, const size_t buffer_size) {
 
     do {
         bytes_received =
-            this->socket->receive_from(boost::asio::buffer(buffer, buffer_size), current_endpoint, NO_FLAGS, ec);
+            this->socket->receive_from(
+                boost::asio::buffer(buffer, buffer_size),
+                current_endpoint,
+                NO_FLAGS,
+                ec);
     } while (this->socket->available() > 0);
 
     this->validate_sender_endpoint(current_endpoint);
