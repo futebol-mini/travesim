@@ -188,6 +188,10 @@ int main(int argc, char** argv) {
          * Send world info to teams
          */
 
+        // FIXME: Use std::chronos
+        // Time comes in seconds, but time_step is in milliseconds
+        field_state.time_step = (uint16_t) (referee->getTime()*1e3/time_step);
+
         for (size_t i = 0; i < robots_per_team; i++){
             convert_to_entity_state(field_state.yellow_team[i], yellow_robots[i]);
             convert_to_entity_state(field_state.blue_team[i], blue_robots[i]);
