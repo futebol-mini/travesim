@@ -96,7 +96,7 @@ PROTO GenericVssRobot [
               metalness 0
             }
             geometry Box {
-               size 0.080000 0.080000 0.002000
+               size 0.075000 0.075000 0.002000
             }
           }
           Solid {
@@ -132,15 +132,6 @@ PROTO GenericVssRobot [
               }
             ]
             name "robot_blob_0_link"
-            # physics Physics {
-            #   density -1
-            #   mass 0.010000
-            #   centerOfMass [ 0.000000 0.000000 0.000000 ]
-            #   inertiaMatrix [
-            #     6.000000e-06 6.000000e-06 1.000000e-05
-            #     0.000000e+00 0.000000e+00 0.000000e+00
-            #   ]
-            # }
           }
           Solid {
             translation -0.017500 -0.017500 0.002000
@@ -157,64 +148,9 @@ PROTO GenericVssRobot [
               }
             ]
             name "robot_blob_1_link"
-            # physics Physics {
-            #   density -1
-            #   mass 0.010000
-            #   centerOfMass [ 0.000000 0.000000 0.000000 ]
-            #   inertiaMatrix [
-            #     6.000000e-06 6.000000e-06 1.000000e-05
-            #     0.000000e+00 0.000000e+00 0.000000e+00
-            #   ]
-            # }
           }
         ]
         name "chapeu_link"
-        boundingObject NULL
-        physics NULL
-      }
-      Solid {
-        children [
-          Pose {
-            translation 0.000000 -0.038500 0.030000
-            children [
-              Shape {
-                appearance PBRAppearance {
-                  baseColor 0.500000 0.500000 0.500000
-                  roughness 1.000000
-                  metalness 0
-                }
-                geometry Box {
-                   size 0.075000 0.002000 0.060000
-                }
-              }
-            ]
-          }
-        ]
-        name "parede_dir_link"
-        contactMaterial "parede_dir"
-        boundingObject NULL
-        physics NULL
-      }
-      Solid {
-        children [
-          Pose {
-            translation 0.000000 0.038500 0.030000
-            children [
-              Shape {
-                appearance PBRAppearance {
-                  baseColor 0.500000 0.500000 0.500000
-                  roughness 1.000000
-                  metalness 0
-                }
-                geometry Box {
-                   size 0.075000 0.002000 0.060000
-                }
-              }
-            ]
-          }
-        ]
-        name "parede_esq_link"
-        contactMaterial "parede_esq"
         boundingObject NULL
         physics NULL
       }
@@ -362,9 +298,6 @@ PROTO GenericVssRobot [
         }
       ]
     }
-    # DEF base_link_col Mesh {
-    #   url "meshes/base_link_col.stl"
-    # }
     physics Physics {
       density -1
       mass 0.113374
