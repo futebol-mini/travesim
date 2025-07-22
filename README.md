@@ -22,6 +22,7 @@
 - [➕ Dependencies](#-dependencies)
 - [🌎 Worlds](#-worlds)
 - [📣 Communication](#-communication)
+  - [💡 Sample client](#-sample-client)
 - [📏 Used models](#-used-models)
   - [📜 Main parameters](#-main-parameters)
   - [⚙️ Motor parameters](#️-motor-parameters)
@@ -29,6 +30,7 @@
 - [📝 Contributing](#-contributing)
 - [✨ Contributors](#-contributors)
 
+<!-- /TOC -->
 <!-- /TOC -->
 
 ## 📷 Screenshots
@@ -97,7 +99,13 @@ The worlds currently supported are as follows:
 
 ## 📣 Communication
 
-All TraveSim controllers adhere the [VSSProto](https://github.com/futebol-mini/VSSProto) standard
+All TraveSim controllers adhere the [VSSProto](https://github.com/futebol-mini/VSSProto) standard, built upon Google's Protocol Buffers.
+
+### 💡 Sample client
+
+A minimal client written in python [is provided as example](https://github.com/futebol-mini/VSSClient.py). It receives information from the simulation and sends commands for each one of the robots.
+
+It's built with [VSSProto.py](https://github.com/futebol-mini/VSSProto.py), the python library for VSSProto use.
 
 ## 📏 Used models
 
