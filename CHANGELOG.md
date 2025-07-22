@@ -9,7 +9,12 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 
 ### Added
 
-- Improve README
+- Improved README
+
+### Removed
+
+- Removed generic robots side walls
+- Reduced hat size
 
 ### Fixed
 
