@@ -28,4 +28,4 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 - Referee bridge controller
 - Implement [VSS Proto](https://github.com/futebol-mini/VSSProto) standard
 
-[25.07.1](https://github.com/futebol-mini/travesim/releases/tag/v25.07.1)
+[25.07.1]: https://github.com/futebol-mini/travesim/releases/tag/v25.07.1
