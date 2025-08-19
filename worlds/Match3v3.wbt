@@ -2,7 +2,7 @@
 
 EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
 EXTERNPROTO "../protos/VssReferee.proto"
-EXTERNPROTO "../protos/VssField.proto"
+EXTERNPROTO "../protos/VssField3v3.proto"
 EXTERNPROTO "../protos/VssBall.proto"
 EXTERNPROTO "../protos/GenericVssRobot.proto"
 
@@ -26,7 +26,7 @@ VssReferee {
 }
 TexturedBackground {
 }
-VssField {
+VssField3v3 {
 }
 VssBall {
   translation 0 0 0.022

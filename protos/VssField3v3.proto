@@ -3,10 +3,10 @@
 # license url: https://mit-license.org/
 # A 3v3 IEEE Very Small Size Soccer field
 
-PROTO VssField [
+PROTO VssField3v3 [
   field SFVec3f    translation     0 0 0
   field SFRotation rotation        0 0 1 0
-  field SFString   name            "VssField"
+  field SFString   name            "VssField3v3"
   field SFBool     locked          TRUE
 ]
 {
@@ -27,7 +27,7 @@ PROTO VssField [
               metalness 0
             }
             geometry Mesh {
-              url "meshes/field_base.stl"
+              url "meshes/VssField3v3/field_base.stl"
             }
           }
           Transform {
@@ -40,7 +40,7 @@ PROTO VssField [
                   metalness 0
                 }
                 geometry Mesh {
-                  url "meshes/field_marks.stl"
+                  url "meshes/VssField3v3/field_marks.stl"
                 }
               }
             ]
@@ -52,7 +52,7 @@ PROTO VssField [
               metalness 0
             }
             geometry Mesh {
-              url "meshes/wall_link.stl"
+              url "meshes/VssField3v3/wall_link.stl"
             }
           }
         ]
@@ -74,7 +74,7 @@ PROTO VssField [
         }
         Shape {
           geometry Mesh {
-            url "meshes/wall_link.stl"
+            url "meshes/VssField3v3/wall_link.stl"
           }
         }
       ]
