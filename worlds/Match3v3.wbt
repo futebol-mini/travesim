@@ -23,6 +23,7 @@ Viewpoint {
 DirectionalLight {
 }
 VssReferee {
+  robotsPerTeam 3
 }
 TexturedBackground {
 }

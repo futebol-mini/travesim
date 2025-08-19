@@ -10,6 +10,7 @@
  * @copyright MIT License - Copyright (c) 2025 Futebol Mini
  */
 
+#include <ostream>
 #include <webots/Robot.hpp>
 #include <webots/Supervisor.hpp>
 #include <webots/Node.hpp>
@@ -18,7 +19,10 @@
 #include <array>
 #include <iostream>
 #include <unordered_map>
+#include <string>
+#include <functional>
 
+#include "travesim_adapters/data/data_common.hpp"
 #include "travesim_webots/robot.hpp"
 
 #include "travesim_webots/message.hpp"
@@ -62,21 +66,32 @@ int main(int argc, char** argv) {
      * External interfaces definitions
      */
 
-    std::string referee_address_str(argv[1]);
-    uint32_t referee_port = std::stoi(argv[2]);
+    const size_t robots_per_team = std::stoi(argv[1]);
 
-    std::string yellow_address_str(argv[3]);
-    uint32_t yellow_port = std::stoi(argv[4]);
+    std::string referee_address_str(argv[2]);
+    uint32_t referee_port = std::stoi(argv[3]);
 
-    std::string blue_address_str(argv[5]);
-    uint32_t blue_port = std::stoi(argv[6]);
+    std::string yellow_address_str(argv[4]);
+    uint32_t yellow_port = std::stoi(argv[5]);
 
-    std::string multicast_addr_str(argv[7]);
-    uint32_t multicast_port = std::stoi(argv[8]);
+    std::string blue_address_str(argv[6]);
+    uint32_t blue_port = std::stoi(argv[7]);
+
+    std::string multicast_addr_str(argv[8]);
+    uint32_t multicast_port = std::stoi(argv[9]);
 
     bool specific_source = false;
-    const travesim::TeamsFormation teams_formation = travesim::THREE_ROBOTS_PER_TEAM;
-    const size_t robots_per_team = static_cast<size_t>(teams_formation);
+    const travesim::TeamsFormation teams_formation = std::invoke([robots_per_team]{
+        switch (robots_per_team) {
+            case 3:
+                return travesim::THREE_ROBOTS_PER_TEAM;
+            case 5:
+                return travesim::FIVE_ROBOTS_PER_TEAM;
+            default:
+                std::cout << "Invalid robots_per_team value! Got " << robots_per_team << " should be 3 or 5" << std::endl;
+                std::exit(-1);
+        }
+    });
 
     std::cout << "Referee addr: " << referee_address_str << std::endl;
     std::cout << "Referee port: " << referee_port << std::endl;
@@ -136,8 +151,11 @@ int main(int argc, char** argv) {
 
     uint32_t frame = 0;
 
-    std::array<travesim::webots_adapter::Robot, robots_per_team> yellow_robots;
-    std::array<travesim::webots_adapter::Robot, robots_per_team> blue_robots;
+    std::vector<travesim::webots_adapter::Robot> yellow_robots;
+    yellow_robots.reserve(robots_per_team);
+
+    std::vector<travesim::webots_adapter::Robot> blue_robots;
+    blue_robots.reserve(robots_per_team);
 
     travesim::webots_adapter::Robot ball(robots->at("VssBall"));
 
@@ -214,8 +232,8 @@ int main(int argc, char** argv) {
 
         frame++;
 
-        travesim::webots_adapter::message_t<robots_per_team> yellow_message;
-        travesim::webots_adapter::message_t<robots_per_team> blue_message;
+        travesim::webots_adapter::message_t<MAX_ROBOTS> yellow_message;
+        travesim::webots_adapter::message_t<MAX_ROBOTS> blue_message;
 
         yellow_message.frame = frame;
         blue_message.frame = frame;

@@ -47,8 +47,6 @@ int main(int argc, char** argv) {
     // get the time step of the current world.
     int timeStep = (int) robot->getBasicTimeStep();
 
-    const size_t robots_per_team = 3;
-
     webots::Receiver* receiver = robot->getReceiver("robot_receiver");
 
     if (!receiver){
@@ -82,7 +80,7 @@ int main(int argc, char** argv) {
             continue;
         }
 
-        auto message = *(travesim::webots_adapter::message_t<robots_per_team>*) receiver->getData();
+        auto message = *(travesim::webots_adapter::message_t<MAX_ROBOTS>*) receiver->getData();
         receiver->nextPacket();
 
         left_motor->setVelocity(clip(message.left_speed[robot_number]));
