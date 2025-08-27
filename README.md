@@ -154,10 +154,16 @@ The model's motor is inspired in [Pololu's 50:1 Micro Metal Gearmotor](https://w
 
 The following parameters may be altered in order to modify the dynamic behavior of the model
 
-- `wheelRadius` - Default value: `0.025`
-- `wheelThickness` - Default value: `0.008`
-- `leftWheelTranslation` - Default value: `0.000000  0.027500 0.023000`
-- `rightWheelTranslation` - Default value: `0.000000 -0.027500 0.023000`
+- `wheelRadius` - Wheel radius in meters. Default value: `0.025`
+- `wheelThickness` - Wheel thickness in meters. Default value: `0.008`
+- `leftWheelTranslation` - Position of the center of the left wheel in relation to the center of the bottom face of the body in meters. Default value: `0.0  0.0275 0.023`
+- `rightWheelTranslation` - Position of the center of the left wheel in relation to the center of the bottom face of the body in meters. Default value: `0.0 -0.0275 0.023`
+- `wheelMass` - Mass of each wheel in kilograms. Default value: `0.018`
+- `bodyMass` - Mass of the robot body in kilograms. Default value: `0.144`
+
+An exemple on how to declare a robot with custom parameters is shown in `protos/CustomVssRobot.proto`
+
+To use them in a simulation, a new world file should be created, replacing `GenericVssRobot` with the custom robot model name
 
 ## 📁 Folder structure
 

@@ -5,6 +5,12 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.md)
 
+## [Unreleased]
+
+### Added
+
+- Allow customization of robot physical parameters
+
 ## [25.08.1]
 
 ### Added
