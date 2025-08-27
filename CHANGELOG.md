@@ -9,6 +9,7 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 
 ### Added
 
+- Create world with 5 robots per team
 - Improved README
 
 ### Removed
