@@ -21,6 +21,10 @@ PROTO GenericVssRobot [
   field  SFColor     robotPrimaryColor      1.0 0.0 0.0        # RGB, 0-1 range
   field  SFColor     robotSecondaryColor    0.0 1.0 0.0        # RGB, 0-1 range
   field  SFColor     bodyColor              0.5 0.5 0.5        # RGB, 0-1 range
+  field  SFFloat     wheelRadius            0.025
+  field  SFFloat     wheelThickness         0.008
+  field  SFVec3f     leftWheelTranslation   0.000000  0.027500 0.023000
+  field  SFVec3f     rightWheelTranslation  0.000000 -0.027500 0.023000
 ]
 {
   %<
@@ -157,7 +161,7 @@ PROTO GenericVssRobot [
       HingeJoint {
         jointParameters HingeJointParameters {
           axis 0.000000 1.000000 0.000000
-          anchor 0.000000 -0.035500 0.023000
+          anchor IS rightWheelTranslation
           dampingConstant 0.0023
           staticFriction 0.01
         }
@@ -172,10 +176,9 @@ PROTO GenericVssRobot [
           }
         ]
         endPoint Solid {
-          translation 0.000000 -0.035500 0.023000
+          translation IS rightWheelTranslation
           children [
             Pose {
-              translation 0.000000 0.004000 0.000000
               rotation 1.000000 0.000000 0.000000 1.570796
               children [
                 Shape {
@@ -185,8 +188,8 @@ PROTO GenericVssRobot [
                     metalness 0
                   }
                   geometry Cylinder {
-                    radius 0.025
-                    height 0.008
+                    radius IS wheelRadius
+                    height IS wheelThickness
                   }
                 }
               ]
@@ -195,12 +198,11 @@ PROTO GenericVssRobot [
           name "roda_dir_link"
           contactMaterial "roda_dir_mat"
           boundingObject Pose {
-            translation 0.000000 0.004000 0.000000
             rotation 1.000000 0.000000 0.000000 1.570796
             children [
               Cylinder {
-                radius 0.025
-                height 0.008
+                radius IS wheelRadius
+                height IS wheelThickness
               }
             ]
           }
@@ -212,7 +214,7 @@ PROTO GenericVssRobot [
       HingeJoint {
         jointParameters HingeJointParameters {
           axis 0.000000 1.000000 0.000000
-          anchor 0.000000 0.035500 0.023000
+          anchor IS leftWheelTranslation
           dampingConstant 0.0023
           staticFriction 0.01
         }
@@ -227,10 +229,9 @@ PROTO GenericVssRobot [
           }
         ]
         endPoint Solid {
-          translation 0.000000 0.035500 0.023000
+          translation IS leftWheelTranslation
           children [
             Pose {
-              translation 0.000000 -0.004000 0.000000
               rotation 1.000000 0.000000 0.000000 1.570796
               children [
                 Shape {
@@ -240,8 +241,8 @@ PROTO GenericVssRobot [
                     metalness 0
                   }
                   geometry Cylinder {
-                    radius 0.025
-                    height 0.008
+                    radius IS wheelRadius
+                    height IS wheelThickness
                   }
                 }
               ]
@@ -250,12 +251,11 @@ PROTO GenericVssRobot [
           name "roda_esq_link"
           contactMaterial "roda_esq_mat"
           boundingObject Pose {
-            translation 0.000000 -0.004000 0.000000
             rotation 1.000000 0.000000 0.000000 1.570796
             children [
               Cylinder {
-                radius 0.025
-                height 0.008
+                radius IS wheelRadius
+                height IS wheelThickness
               }
             ]
           }
