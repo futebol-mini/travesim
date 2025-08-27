@@ -150,14 +150,14 @@ int main(int argc, char** argv) {
     std::vector<travesim::webots_adapter::Robot> blue_robots;
     blue_robots.reserve(robots_per_team);
 
-    travesim::webots_adapter::Robot ball(robots->at("VssBall"));
+    travesim::webots_adapter::Robot ball((*robots)["VssBall"]);
 
     for (size_t i = 0; i < robots_per_team; i++) {
         std::string yellow_robot_name = "YellowRobot" + std::to_string(i);
         std::string blue_robot_name = "BlueRobot" + std::to_string(i);
 
-        yellow_robots[i] = travesim::webots_adapter::Robot(robots->at(yellow_robot_name));
-        blue_robots[i] = travesim::webots_adapter::Robot(robots->at(blue_robot_name));
+        yellow_robots[i] = travesim::webots_adapter::Robot((*robots)[yellow_robot_name]);
+        blue_robots[i] = travesim::webots_adapter::Robot((*robots)[blue_robot_name]);
     }
 
     while (referee->step(time_step) != -1) {
