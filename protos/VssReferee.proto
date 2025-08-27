@@ -8,6 +8,8 @@ PROTO VssReferee [
   field  SFString    name                       "VssReferee"       # Is `Robot.name`.
   field  SFString    controller                 "referee_controller"       # Is `Robot.name`.
 
+  field  SFInt32     robotsPerTeam              3
+
   field  SFString    replacer_address           "127.0.0.1"       # Is `Robot.name`.
   field  SFInt32     replacer_port              20011
 
@@ -23,6 +25,8 @@ PROTO VssReferee [
 ]
 {
   %<
+    const robotsPerTeam = fields.robotsPerTeam.value
+
     const replacer_address = fields.replacer_address.value
     const replacer_port = fields.replacer_port.value
 
@@ -39,6 +43,8 @@ PROTO VssReferee [
     name IS name
     controller IS controller
     controllerArgs [
+      "%<= robotsPerTeam >%"
+
       "%<= replacer_address >%"
       "%<= replacer_port >%"
 

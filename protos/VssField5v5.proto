@@ -1,0 +1,75 @@
+#VRML_SIM R2025a utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the VssField5v5
+# Extracted from: field_5v5.urdf
+
+PROTO VssField5v5 [
+    field SFVec3f    translation     0 0 0
+    field SFRotation rotation        0 0 1 0
+    field SFString   name            "VssField5v5"
+    field SFBool     locked          TRUE
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    locked IS locked
+    children [
+      Shape {
+        appearance DEF Gazebo/Black PBRAppearance {
+          baseColor 0 0 0
+          roughness 1.000000
+          metalness 0
+        }
+        geometry DEF base_link Mesh {
+          url "meshes/VssField5v5/base_link.stl"
+        }
+      }
+      Pose {
+        translation 0.000000 0.000000 0.000100
+        children [
+          Shape {
+            appearance DEF Gazebo/White PBRAppearance {
+              baseColor 1.0 1.0 1.0
+              roughness 1.000000
+              metalness 0
+            }
+            geometry DEF marcas_campo Mesh {
+              url "meshes/VssField5v5/marcas_campo.stl"
+            }
+          }
+        ]
+      }
+      Shape {
+        appearance USE Gazebo/White
+        geometry DEF laterais_link Mesh {
+          url "meshes/VssField5v5/laterais_link.stl"
+        }
+      }
+    ]
+
+    # Correct bounding object definition
+    boundingObject Group {
+      children [
+        Transform {
+          translation 0 0 -0.005
+          children [
+            Shape {
+              geometry Box {
+                size 2.6 2.0 0.01
+              }
+            }
+          ]
+        }
+        Shape {
+          geometry Mesh {
+            url "meshes/VssField5v5/wall_link.stl"
+          }
+        }
+      ]
+    }
+  }
+}
+

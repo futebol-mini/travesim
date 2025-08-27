@@ -4,6 +4,8 @@
 
 #include <cstdint>
 
+#define MAX_ROBOTS 5
+
 namespace travesim {
 namespace webots_adapter {
 template <uint8_t size>
