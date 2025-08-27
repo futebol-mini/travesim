@@ -1,0 +1,50 @@
+BasedOnStyle: LLVM
+Language: Cpp
+
+# General options
+UseTab: Never
+TabWidth: 4
+IndentWidth: 4
+
+# Spacing options
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInConditionalStatement: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+SpaceAfterCStyleCast: true
+PointerAlignment: Left
+ReferenceAlignment: Left
+
+# Indentation options
+IndentCaseLabels: true
+IndentCaseBlocks: false
+IndentWrappedFunctionNames: false
+NamespaceIndentation: None
+AccessModifierOffset: -4
+ConstructorInitializerIndentWidth: 4
+
+# Line breaking options
+ColumnLimit: 256
+BreakBeforeBraces: Attach
+AllowShortBlocksOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# Other formatting options
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Left
+AlignOperands: false
+AlignTrailingComments: false
+BinPackArguments: true
+BinPackParameters: true
+BreakBeforeTernaryOperators: true
+Cpp11BracedListStyle: false
+FixNamespaceComments: false
+SortIncludes: false
+SortUsingDeclarations: false
