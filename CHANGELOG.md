@@ -10,6 +10,16 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 ### Added
 
 - Allow customization of robot physical parameters
+- Clang-format as default C/C++ formatter
+
+### Fixed
+
+- Field load in RobotDev world
+- Referee crash in RobotDev world
+
+### Removed
+
+- Uncrustify C++ formatter
 
 ## [25.08.1]
 
@@ -26,7 +36,7 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 ### Fixed
 
 - Robots now always initialize with zero velocity
-- Include missing time info in step fild in vision packets
+- Include missing time info in step field in vision packets
 
 ## [25.07.1]
 
