@@ -1,0 +1,48 @@
+#VRML_SIM R2025a utf8
+# template language: javascript
+# license: MIT License
+# license url: https://mit-license.org/
+
+EXTERNPROTO "./GenericVssRobot.proto"
+
+PROTO CustomVssRobot [
+  field  SFVec3f     translation            0 0 0
+  field  SFRotation  rotation               0 0 1 0
+  field  SFString    name                   "CustomVssRobot"  # Is `Robot.name`.
+  field  SFString    controller             "<none>"           # Is `Robot.controller`.
+  field  SFString    teamName               ""                 # Is `Robot.controller`.
+  field  SFInt32     robotNumber            0                  # Is `Robot.controller`.
+  field  MFString    controllerArgs         []                 # Is `Robot.controllerArgs`.
+  field  SFString    customData             ""                 # Is `Robot.customData`.
+  field  SFBool      supervisor             FALSE              # Is `Robot.supervisor`.
+  field  SFBool      synchronization        TRUE               # Is `Robot.synchronization`.
+  field  SFBool      selfCollision          FALSE              # Is `Robot.selfCollision`.
+  field  SFColor     teamColor              0.0 0.0 1.0        # RGB, 0-1 range
+  field  SFColor     robotPrimaryColor      1.0 0.0 0.0        # RGB, 0-1 range
+  field  SFColor     robotSecondaryColor    0.0 1.0 0.0        # RGB, 0-1 range
+  field  SFColor     bodyColor              0.5 0.5 0.5        # RGB, 0-1 range
+]
+{
+  GenericVssRobot{
+    translation IS translation
+    rotation IS rotation
+    name IS name
+    controller IS controller
+    teamName IS teamName
+    robotNumber IS robotNumber
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    teamColor IS teamColor
+    robotPrimaryColor IS robotPrimaryColor
+    robotSecondaryColor IS robotSecondaryColor
+    bodyColor IS bodyColor
+
+    wheelRadius 0.015
+    wheelThickness 0.004
+    leftWheelTranslation 0.000000  0.027500 0.013000
+    rightWheelTranslation 0.000000 -0.027500 0.013000
+  }
+}

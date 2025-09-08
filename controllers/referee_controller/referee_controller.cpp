@@ -16,7 +16,6 @@
 #include <webots/Node.hpp>
 #include <webots/Emitter.hpp>
 #include <memory>
-#include <array>
 #include <iostream>
 #include <unordered_map>
 #include <string>
@@ -38,11 +37,11 @@ inline std::shared_ptr<std::unordered_map<std::string, webots::Node*>> get_robot
     auto entities = std::make_shared<std::unordered_map<std::string, webots::Node*>>();
     auto count = children->getCount();
 
-    for (int i = 0; i < count; i++){
+    for (int i = 0; i < count; i++) {
         webots::Node* node = children->getMFNode(i);
         auto* name = node->getField("name");
 
-        if (name){
+        if (name) {
             (*entities)[name->getSFString()] = node;
         }
     }
@@ -58,7 +57,7 @@ inline void convert_to_entity_state(travesim::EntityState& output, travesim::web
 }
 
 inline std::string build_name_from_team_number(bool is_yellow, uint8_t number) {
-    return std::string(is_yellow ? "Yellow":"Blue") + std::string("Robot") + std::to_string(number);
+    return std::string(is_yellow ? "Yellow" : "Blue") + std::string("Robot") + std::to_string(number);
 }
 
 int main(int argc, char** argv) {
@@ -81,12 +80,14 @@ int main(int argc, char** argv) {
     uint32_t multicast_port = std::stoi(argv[9]);
 
     bool specific_source = false;
-    const travesim::TeamsFormation teams_formation = std::invoke([robots_per_team]{
+    const travesim::TeamsFormation teams_formation = std::invoke([robots_per_team] {
         switch (robots_per_team) {
             case 3:
                 return travesim::THREE_ROBOTS_PER_TEAM;
+
             case 5:
                 return travesim::FIVE_ROBOTS_PER_TEAM;
+
             default:
                 std::cout << "Invalid robots_per_team value! Got " << robots_per_team << " should be 3 or 5" << std::endl;
                 std::exit(-1);
@@ -108,19 +109,11 @@ int main(int argc, char** argv) {
     travesim::proto::VisionSender vision_sender(multicast_addr_str, multicast_port);
     travesim::FieldState field_state(teams_formation);
 
-    travesim::proto::TeamReceiver yellow_receiver(yellow_address_str,
-                                                  yellow_port,
-                                                  true,
-                                                  specific_source,
-                                                  teams_formation);
+    travesim::proto::TeamReceiver yellow_receiver(yellow_address_str, yellow_port, true, specific_source, teams_formation);
 
     travesim::TeamCommand yellow_command(teams_formation);
 
-    travesim::proto::TeamReceiver blue_receiver(blue_address_str,
-                                                blue_port,
-                                                false,
-                                                specific_source,
-                                                teams_formation);
+    travesim::proto::TeamReceiver blue_receiver(blue_address_str, blue_port, false, specific_source, teams_formation);
 
     travesim::TeamCommand blue_command(teams_formation);
 
@@ -157,17 +150,17 @@ int main(int argc, char** argv) {
     std::vector<travesim::webots_adapter::Robot> blue_robots;
     blue_robots.reserve(robots_per_team);
 
-    travesim::webots_adapter::Robot ball(robots->at("VssBall"));
+    travesim::webots_adapter::Robot ball((*robots)["VssBall"]);
 
-    for (size_t i = 0; i < robots_per_team; i++){
+    for (size_t i = 0; i < robots_per_team; i++) {
         std::string yellow_robot_name = "YellowRobot" + std::to_string(i);
         std::string blue_robot_name = "BlueRobot" + std::to_string(i);
 
-        yellow_robots[i] = travesim::webots_adapter::Robot(robots->at(yellow_robot_name));
-        blue_robots[i] = travesim::webots_adapter::Robot(robots->at(blue_robot_name));
+        yellow_robots[i] = travesim::webots_adapter::Robot((*robots)[yellow_robot_name]);
+        blue_robots[i] = travesim::webots_adapter::Robot((*robots)[blue_robot_name]);
     }
 
-    while (referee->step(time_step) != -1){
+    while (referee->step(time_step) != -1) {
         /**
          * Process messages from referee
          */
@@ -208,9 +201,9 @@ int main(int argc, char** argv) {
 
         // FIXME: Use std::chronos
         // Time comes in seconds, but time_step is in milliseconds
-        field_state.time_step = (uint16_t) (referee->getTime()*1e3/time_step);
+        field_state.time_step = (uint16_t) (referee->getTime() * 1e3 / time_step);
 
-        for (size_t i = 0; i < robots_per_team; i++){
+        for (size_t i = 0; i < robots_per_team; i++) {
             convert_to_entity_state(field_state.yellow_team[i], yellow_robots[i]);
             convert_to_entity_state(field_state.blue_team[i], blue_robots[i]);
         }
@@ -238,7 +231,7 @@ int main(int argc, char** argv) {
         yellow_message.frame = frame;
         blue_message.frame = frame;
 
-        for (size_t i = 0; i < robots_per_team; i++){
+        for (size_t i = 0; i < robots_per_team; i++) {
             yellow_message.left_speed[i] = yellow_command.robot_command[i].left_speed;
             yellow_message.right_speed[i] = yellow_command.robot_command[i].right_speed;
 

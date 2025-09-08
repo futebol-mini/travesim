@@ -26,17 +26,17 @@
 - [📏 Used models](#-used-models)
   - [📜 Main parameters](#-main-parameters)
   - [⚙️ Motor parameters](#️-motor-parameters)
+  - [🛠️ Customize the robot model](#️-customize-the-robot-model)
 - [📁 Folder structure](#-folder-structure)
 - [📝 Contributing](#-contributing)
 - [✨ Contributors](#-contributors)
 
 <!-- /TOC -->
-<!-- /TOC -->
 
 ## 📷 Screenshots
 
 <p align="center">
-  <img height=300px src="./docs/Match3v3.png" alt="Match3v3"/>
+  <img height=300px src="./docs/imgs/Match3v3.png" alt="Match3v3"/>
 </p>
 
 ## 🎈 Intro
@@ -95,6 +95,7 @@ In the current version, TraveSim can handle games with 3 robots per team. In the
 The worlds currently supported are as follows:
 
 - `Match3v3.wbt` - Base world for 3v3 matches
+- `Match5v5.wbt` - Base world for 5v5 matches
 - `RobotDev.wbt` - Development world with a single robot
 
 ## 📣 Communication
@@ -146,6 +147,21 @@ The model's motor is inspired in [Pololu's 50:1 Micro Metal Gearmotor](https://w
 |        Motor max speed         |   68  | rad/s  |
 |     Robot max linear speed     |   1.7 | m/s    |
 |    Robot max angular speed     |   9.8 | rad/s  |
+
+### 🛠️ Customize the robot model
+
+The following parameters may be altered in order to modify the dynamic behavior of the model
+
+- `wheelRadius` - Wheel radius in meters. Default value: `0.025`
+- `wheelThickness` - Wheel thickness in meters. Default value: `0.008`
+- `leftWheelTranslation` - Position of the center of the left wheel in relation to the center of the bottom face of the body in meters. Default value: `0.0  0.0275 0.023`
+- `rightWheelTranslation` - Position of the center of the left wheel in relation to the center of the bottom face of the body in meters. Default value: `0.0 -0.0275 0.023`
+- `wheelMass` - Mass of each wheel in kilograms. Default value: `0.018`
+- `bodyMass` - Mass of the robot body in kilograms. Default value: `0.144`
+
+An exemple on how to declare a robot with custom parameters is shown in `protos/CustomVssRobot.proto`
+
+To use them in a simulation, a new world file should be created, replacing `GenericVssRobot` with the custom robot model name
 
 ## 📁 Folder structure
 

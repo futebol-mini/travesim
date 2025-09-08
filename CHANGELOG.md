@@ -5,6 +5,22 @@ and this project adheres to [Calendar Versioning](https://calver.org/).
 
 Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.md)
 
+## [25.09.1]
+
+### Added
+
+- Allow customization of robot physical parameters
+- Clang-format as default C/C++ formatter
+
+### Fixed
+
+- Field load in RobotDev world
+- Referee crash in RobotDev world
+
+### Removed
+
+- Uncrustify C++ formatter
+
 ## [25.08.1]
 
 ### Added
@@ -20,7 +36,7 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 ### Fixed
 
 - Robots now always initialize with zero velocity
-- Include missing time info in step fild in vision packets
+- Include missing time info in step field in vision packets
 
 ## [25.07.1]
 
@@ -36,3 +52,4 @@ Para a versão em PT-BR 🇧🇷 desse documento, veja [aqui](./CHANGELOG.pt-br.
 
 [25.07.1]: https://github.com/futebol-mini/travesim/releases/tag/v25.07.1
 [25.08.1]: https://github.com/futebol-mini/travesim/releases/tag/v25.08.1
+[25.09.1]: https://github.com/futebol-mini/travesim/releases/tag/v25.09.1
