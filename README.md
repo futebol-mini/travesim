@@ -25,8 +25,8 @@
   - [💡 Sample client](#-sample-client)
 - [📏 Used models](#-used-models)
   - [📜 Main parameters](#-main-parameters)
-  - [⚙️ Motor parameters](#️-motor-parameters)
-  - [🛠️ Customize the robot model](#️-customize-the-robot-model)
+  - [⚙️ Motor parameters](#-motor-parameters)
+  - [🛠️ Customize the robot model](#-customize-the-robot-model)
 - [📁 Folder structure](#-folder-structure)
 - [📝 Contributing](#-contributing)
 - [✨ Contributors](#-contributors)
@@ -90,7 +90,7 @@ make
 
 ## 🌎 Worlds
 
-In the current version, TraveSim can handle games with 3 robots per team. In the near future we plan to port the field for 5v5 matches.
+In the current version, TraveSim can handle games with 3 or 5 robots per team.
 
 The worlds currently supported are as follows:
 
