@@ -20,13 +20,14 @@
 - [📷 Screenshots](#-screenshots)
 - [🎈 Intro](#-intro)
 - [➕ Dependencies](#-dependencies)
+- [🐳 Docker](#-docker)
 - [🌎 Worlds](#-worlds)
 - [📣 Communication](#-communication)
   - [💡 Sample client](#-sample-client)
 - [📏 Used models](#-used-models)
   - [📜 Main parameters](#-main-parameters)
-  - [⚙️ Motor parameters](#️-motor-parameters)
-  - [🛠️ Customize the robot model](#️-customize-the-robot-model)
+  - [⚙️ Motor parameters](#-motor-parameters)
+  - [🛠️ Customize the robot model](#-customize-the-robot-model)
 - [📁 Folder structure](#-folder-structure)
 - [📝 Contributing](#-contributing)
 - [✨ Contributors](#-contributors)
@@ -88,9 +89,43 @@ cd travesim
 make
 ```
 
+## 🐳 Docker
+
+To run the project with docker, use the command
+
+```bash
+docker run --rm \
+    --net=host \
+    --gpus=all \
+    -e DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    -v $XAUTHORITY:/root/.Xauthority:ro \
+    --name travesim \
+    ghcr.io/futebol-mini/travesim
+```
+
+It's possible to build the image locally with
+
+```bash
+docker build . -t travesim
+```
+
+Then run it with
+
+```bash
+docker run --rm \
+    --net=host \
+    --gpus=all \
+    -e DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    -v $XAUTHORITY:/root/.Xauthority:ro \
+    --name travesim \
+    travesim
+```
+
 ## 🌎 Worlds
 
-In the current version, TraveSim can handle games with 3 robots per team. In the near future we plan to port the field for 5v5 matches.
+In the current version, TraveSim can handle games with 3 or 5 robots per team.
 
 The worlds currently supported are as follows:
 
@@ -101,6 +136,13 @@ The worlds currently supported are as follows:
 ## 📣 Communication
 
 All TraveSim controllers adhere the [VSSProto](https://github.com/futebol-mini/VSSProto) standard, built upon Google's Protocol Buffers.
+
+| Name        | IP address  |  Port   |
+|:------------|:-----------:|:-------:|
+| Replacer    | `127.0.0.1` | `20011` |
+| Yellow Team | `127.0.0.1` | `20012` |
+| Blue Team   | `127.0.0.1` | `20013` |
+| Vision      | `224.0.0.1` | `10002` |
 
 ### 💡 Sample client
 
@@ -119,7 +161,7 @@ Robot's color pattern follows the standard specified in the IEEE Latin American 
 The physical propoerties of the robot where determined from typical materials used in real world robot manufacturing
 
 |         Parameter          |          Value | Unit  |
-| :------------------------: | -------------: | :---- |
+|:--------------------------:|---------------:|:------|
 |        Wheel radius        |             25 | mm    |
 |      Wheel thickness       |              8 | mm    |
 |     Wheels separation      |             55 | mm    |
@@ -139,12 +181,12 @@ The physical propoerties of the robot where determined from typical materials us
 The model's motor is inspired in [Pololu's 50:1 Micro Metal Gearmotor](https://www.pololu.com/product/3073) in order to achieve realistic values.
 
 |           Parameter            | Value | Unit   |
-| :----------------------------: | ----: | :----- |
+|:------------------------------:|------:|:-------|
 |        Motor max torque        |    73 | mN m   |
 | Robot max linear acceleration  |    16 | m/s²   |
 | Robot max angular acceleration |  1420 | rad/s² |
 |        Motor max speed         |   650 | RPM    |
-|        Motor max speed         |   68  | rad/s  |
+|        Motor max speed         |    68 | rad/s  |
 |     Robot max linear speed     |   1.7 | m/s    |
 |    Robot max angular speed     |   9.8 | rad/s  |
 
