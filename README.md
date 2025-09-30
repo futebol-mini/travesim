@@ -20,6 +20,7 @@
 - [📷 Screenshots](#-screenshots)
 - [🎈 Intro](#-intro)
 - [➕ Dependencies](#-dependencies)
+- [🐳 Docker](#-docker)
 - [🌎 Worlds](#-worlds)
 - [📣 Communication](#-communication)
   - [💡 Sample client](#-sample-client)
@@ -86,6 +87,40 @@ At last, compile the controllers with:
 ```bash
 cd travesim
 make
+```
+
+## 🐳 Docker
+
+To run the project with docker, use the command
+
+```bash
+docker run --rm \
+    --net=host \
+    --gpus=all \
+    -e DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    -v $XAUTHORITY:/root/.Xauthority:ro \
+    --name travesim \
+    ghcr.io/futebol-mini/travesim
+```
+
+It's possible to build the image locally with
+
+```bash
+docker build . -t travesim
+```
+
+Then run it with
+
+```bash
+docker run --rm \
+    --net=host \
+    --gpus=all \
+    -e DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+    -v $XAUTHORITY:/root/.Xauthority:ro \
+    --name travesim \
+    travesim
 ```
 
 ## 🌎 Worlds
