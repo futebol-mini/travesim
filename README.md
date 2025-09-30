@@ -102,6 +102,13 @@ The worlds currently supported are as follows:
 
 All TraveSim controllers adhere the [VSSProto](https://github.com/futebol-mini/VSSProto) standard, built upon Google's Protocol Buffers.
 
+| Name        | IP address  |  Port   |
+|:------------|:-----------:|:-------:|
+| Replacer    | `127.0.0.1` | `20011` |
+| Yellow Team | `127.0.0.1` | `20012` |
+| Blue Team   | `127.0.0.1` | `20013` |
+| Vision      | `224.0.0.1` | `10002` |
+
 ### 💡 Sample client
 
 A minimal client written in python [is provided as example](https://github.com/futebol-mini/VSSClient.py). It receives information from the simulation and sends commands for each one of the robots.
@@ -119,7 +126,7 @@ Robot's color pattern follows the standard specified in the IEEE Latin American 
 The physical propoerties of the robot where determined from typical materials used in real world robot manufacturing
 
 |         Parameter          |          Value | Unit  |
-| :------------------------: | -------------: | :---- |
+|:--------------------------:|---------------:|:------|
 |        Wheel radius        |             25 | mm    |
 |      Wheel thickness       |              8 | mm    |
 |     Wheels separation      |             55 | mm    |
@@ -139,12 +146,12 @@ The physical propoerties of the robot where determined from typical materials us
 The model's motor is inspired in [Pololu's 50:1 Micro Metal Gearmotor](https://www.pololu.com/product/3073) in order to achieve realistic values.
 
 |           Parameter            | Value | Unit   |
-| :----------------------------: | ----: | :----- |
+|:------------------------------:|------:|:-------|
 |        Motor max torque        |    73 | mN m   |
 | Robot max linear acceleration  |    16 | m/s²   |
 | Robot max angular acceleration |  1420 | rad/s² |
 |        Motor max speed         |   650 | RPM    |
-|        Motor max speed         |   68  | rad/s  |
+|        Motor max speed         |    68 | rad/s  |
 |     Robot max linear speed     |   1.7 | m/s    |
 |    Robot max angular speed     |   9.8 | rad/s  |
 
