@@ -22,6 +22,9 @@ PROTO VssReferee [
   field  SFString    vision_multicast_address   "224.0.0.1"       # Is `Robot.name`.
   field  SFInt32     multicast_port             10002
 
+  field  SFFloat     match_duration             600               # Seconds; zero disables the clock.
+  field  SFString    telemetry_path              ""                # Optional JSON Lines output path.
+
 ]
 {
   %<
@@ -38,6 +41,9 @@ PROTO VssReferee [
 
     const vision_multicast_address = fields.vision_multicast_address.value
     const multicast_port = fields.multicast_port.value
+
+    const match_duration = fields.match_duration.value
+    const telemetry_path = fields.telemetry_path.value
   >%
   Robot {
     name IS name
@@ -56,6 +62,9 @@ PROTO VssReferee [
 
       "%<= vision_multicast_address >%"
       "%<= multicast_port >%"
+
+      "%<= match_duration >%"
+      "%<= telemetry_path >%"
     ]
     translation 0 0 1
     locked TRUE

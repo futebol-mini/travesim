@@ -10,7 +10,12 @@
  * @copyright MIT License - Copyright (c) 2025 Futebol Mini
  */
 
+#include <array>
+#include <fstream>
+#include <iomanip>
 #include <ostream>
+#include <queue>
+#include <vector>
 #include <webots/Robot.hpp>
 #include <webots/Supervisor.hpp>
 #include <webots/Node.hpp>
@@ -23,6 +28,7 @@
 
 #include "travesim_adapters/data/data_common.hpp"
 #include "travesim_webots/robot.hpp"
+#include "travesim_webots/match_state.hpp"
 
 #include "travesim_webots/message.hpp"
 
@@ -60,6 +66,70 @@ inline std::string build_name_from_team_number(bool is_yellow, uint8_t number) {
     return std::string(is_yellow ? "Yellow" : "Blue") + std::string("Robot") + std::to_string(number);
 }
 
+struct InitialPose {
+    std::array<double, 3> position;
+    double yaw;
+};
+
+inline InitialPose capture_pose(travesim::webots_adapter::Robot& entity) {
+    return InitialPose{ entity.get_position(), entity.get_yaw() };
+}
+
+inline void restore_pose(travesim::webots_adapter::Robot& entity, const InitialPose& pose) {
+    entity.set_position(pose.position[0], pose.position[1], pose.position[2]);
+    entity.set_yaw(pose.yaw);
+    entity.stop();
+}
+
+inline void write_entity_json(std::ostream& output, const travesim::EntityState& entity) {
+    output << "{\"x\":" << entity.position.x
+           << ",\"y\":" << entity.position.y
+           << ",\"vx\":" << entity.velocity.x
+           << ",\"vy\":" << entity.velocity.y
+           << ",\"orientation\":" << entity.angular_position
+           << ",\"angular_velocity\":" << entity.angular_velocity << "}";
+}
+
+inline void write_team_json(std::ostream& output, const std::vector<travesim::EntityState>& team) {
+    output << "[";
+    for (size_t i = 0; i < team.size(); i++) {
+        if (i > 0) {
+            output << ",";
+        }
+        write_entity_json(output, team[i]);
+    }
+    output << "]";
+}
+
+inline void write_frame_json(
+    std::ostream& output,
+    double elapsed_seconds,
+    const travesim::FieldState& field_state,
+    travesim::webots_adapter::ScoringTeam scoring_team,
+    bool finished) {
+    output << std::setprecision(10)
+           << "{\"type\":\"frame\",\"time\":" << elapsed_seconds
+           << ",\"step\":" << field_state.time_step
+           << ",\"goals_blue\":" << field_state.goals_blue
+           << ",\"goals_yellow\":" << field_state.goals_yellow
+           << ",\"goal\":\"";
+
+    if (scoring_team == travesim::webots_adapter::ScoringTeam::BLUE) {
+        output << "blue";
+    } else if (scoring_team == travesim::webots_adapter::ScoringTeam::YELLOW) {
+        output << "yellow";
+    }
+
+    output << "\",\"finished\":" << (finished ? "true" : "false") << ",\"ball\":";
+    write_entity_json(output, field_state.ball);
+    output << ",\"yellow\":";
+    write_team_json(output, field_state.yellow_team);
+    output << ",\"blue\":";
+    write_team_json(output, field_state.blue_team);
+    output << "}\n";
+    output.flush();
+}
+
 int main(int argc, char** argv) {
     /**
      * External interfaces definitions
@@ -78,6 +148,9 @@ int main(int argc, char** argv) {
 
     std::string multicast_addr_str(argv[8]);
     uint32_t multicast_port = std::stoi(argv[9]);
+
+    const double match_duration = argc > 10 ? std::stod(argv[10]) : 600.0;
+    const std::string telemetry_path = argc > 11 ? argv[11] : "";
 
     bool specific_source = false;
     const travesim::TeamsFormation teams_formation = std::invoke([robots_per_team] {
@@ -105,9 +178,23 @@ int main(int argc, char** argv) {
 
     std::cout << "Vision addr: " << multicast_addr_str << std::endl;
     std::cout << "Vision port: " << multicast_port << std::endl;
+    std::cout << "Match duration: " << match_duration << " s" << std::endl;
+    if (!telemetry_path.empty()) {
+        std::cout << "Telemetry path: " << telemetry_path << std::endl;
+    }
 
     travesim::proto::VisionSender vision_sender(multicast_addr_str, multicast_port);
     travesim::FieldState field_state(teams_formation);
+    travesim::webots_adapter::MatchState match_state(match_duration);
+
+    std::ofstream telemetry;
+    if (!telemetry_path.empty()) {
+        telemetry.open(telemetry_path, std::ios::out | std::ios::trunc);
+        if (!telemetry.is_open()) {
+            std::cerr << "Could not open telemetry file: " << telemetry_path << std::endl;
+            return -1;
+        }
+    }
 
     travesim::proto::TeamReceiver yellow_receiver(yellow_address_str, yellow_port, true, specific_source, teams_formation);
 
@@ -156,9 +243,23 @@ int main(int argc, char** argv) {
         std::string yellow_robot_name = "YellowRobot" + std::to_string(i);
         std::string blue_robot_name = "BlueRobot" + std::to_string(i);
 
-        yellow_robots[i] = travesim::webots_adapter::Robot((*robots)[yellow_robot_name]);
-        blue_robots[i] = travesim::webots_adapter::Robot((*robots)[blue_robot_name]);
+        yellow_robots.emplace_back((*robots)[yellow_robot_name]);
+        blue_robots.emplace_back((*robots)[blue_robot_name]);
     }
+
+    const InitialPose initial_ball_pose = capture_pose(ball);
+    std::vector<InitialPose> initial_yellow_poses;
+    std::vector<InitialPose> initial_blue_poses;
+    initial_yellow_poses.reserve(robots_per_team);
+    initial_blue_poses.reserve(robots_per_team);
+
+    for (size_t i = 0; i < robots_per_team; i++) {
+        initial_yellow_poses.push_back(capture_pose(yellow_robots[i]));
+        initial_blue_poses.push_back(capture_pose(blue_robots[i]));
+    }
+
+    match_state.synchronize_ball(ball.get_position2d());
+    const double match_start_time = referee->getTime();
 
     while (referee->step(time_step) != -1) {
         /**
@@ -192,6 +293,8 @@ int main(int argc, char** argv) {
                 states_queue.pop();
             }
 
+            match_state.synchronize_ball(ball.get_position2d());
+
             referee->simulationSetMode(webots::Supervisor::SIMULATION_MODE_REAL_TIME);
         }
 
@@ -210,7 +313,36 @@ int main(int argc, char** argv) {
 
         convert_to_entity_state(field_state.ball, ball);
 
+        const auto scoring_team = match_state.observe_ball(field_state.ball.position);
+        field_state.goals_blue = match_state.goals_blue();
+        field_state.goals_yellow = match_state.goals_yellow();
+
+        const double elapsed_seconds = referee->getTime() - match_start_time;
+        const bool match_finished = match_state.is_finished(elapsed_seconds);
+
         vision_sender.send(&field_state);
+
+        if (telemetry.is_open()) {
+            write_frame_json(telemetry, elapsed_seconds, field_state, scoring_team, match_finished);
+        }
+
+        if (scoring_team != travesim::webots_adapter::ScoringTeam::NONE) {
+            referee->simulationSetMode(webots::Supervisor::SIMULATION_MODE_PAUSE);
+            restore_pose(ball, initial_ball_pose);
+            for (size_t i = 0; i < robots_per_team; i++) {
+                restore_pose(yellow_robots[i], initial_yellow_poses[i]);
+                restore_pose(blue_robots[i], initial_blue_poses[i]);
+            }
+            match_state.synchronize_ball(ball.get_position2d());
+            referee->simulationSetMode(webots::Supervisor::SIMULATION_MODE_REAL_TIME);
+        }
+
+        if (match_finished) {
+            std::cout << "Match finished: blue " << match_state.goals_blue()
+                      << " x " << match_state.goals_yellow() << " yellow" << std::endl;
+            referee->simulationQuit(0);
+            break;
+        }
 
         /**
          * Wait for teams to send a command

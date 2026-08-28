@@ -205,6 +205,33 @@ An exemple on how to declare a robot with custom parameters is shown in `protos/
 
 To use them in a simulation, a new world file should be created, replacing `GenericVssRobot` with the custom robot model name
 
+## ⏱️ Match supervision and telemetry
+
+`VssReferee` owns the match clock and scoreboard. A goal is detected when the
+ball trajectory crosses either goal line inside the goal mouth. The supervisor
+then publishes `goals_blue` and `goals_yellow`, restores the ball and every
+robot to their initial poses, and stops their physics before play resumes.
+
+The following fields configure a match:
+
+- `match_duration`: duration in seconds (default: `600`; use `0` to disable);
+- `telemetry_path`: optional JSON Lines file containing every frame, score,
+  goal event, entity pose and velocity. Parent directories must already exist.
+
+For example:
+
+```text
+VssReferee {
+  robotsPerTeam 3
+  match_duration 300
+  telemetry_path "/tmp/travesim-match.jsonl"
+}
+```
+
+The last telemetry frame has `"finished":true`; after writing it and sending
+the final vision packet, the supervisor ends the Webots simulation. An empty
+`telemetry_path` keeps file recording disabled.
+
 ## 📁 Folder structure
 
 - **controllers/** - Webots controllers folder
