@@ -49,6 +49,8 @@ fira_message::sim_to_ref::Environment VisionSender::field_state_to_env_pb_msg(Fi
 
     // Set step
     env_data.set_step(p_field_state->time_step);
+    env_data.set_goals_blue(p_field_state->goals_blue);
+    env_data.set_goals_yellow(p_field_state->goals_yellow);
 
     // Set ball data
     fira_message::Ball* frame_ball = frame->mutable_ball();

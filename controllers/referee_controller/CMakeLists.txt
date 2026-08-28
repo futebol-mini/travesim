@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.22)
 
 project(referee_controller CXX)
 
+enable_testing()
+
 add_subdirectory(adapters)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
@@ -38,6 +40,7 @@ include_directories(
 
 add_executable(referee_controller
     referee_controller.cpp
+    src/match_state.cpp
     src/robot.cpp
 )
 
@@ -68,3 +71,11 @@ target_link_libraries(command_sender
   travesim_adapters_protobuf_comm
   pb_msgs_lib
 )
+
+add_executable(match_state_test
+  test/match_state.test.cpp
+  src/match_state.cpp
+  adapters/src/lib/data/entity_state.cpp
+)
+
+add_test(NAME match_state_test COMMAND match_state_test)

@@ -40,6 +40,9 @@ class FieldState {
 
         uint time_step;  /**< ODE time step */
 
+        uint32_t goals_blue;
+        uint32_t goals_yellow;
+
         uint8_t robots_per_team;
 
         /**

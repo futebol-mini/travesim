@@ -127,6 +127,34 @@ O modelo do motor é inspirado no motor [Pololu 50:1 Micro Metal Gearmotor](http
 | Velocidade linear máxima do robô  |   1.7 | m/s     |
 | Velocidade angular máxima do robô |   9.8 | rad/s   |
 
+## ⏱️ Supervisão e telemetria da partida
+
+O `VssReferee` controla o relógio e o placar da partida. Um gol é detectado
+quando a trajetória da bola cruza uma das linhas de gol dentro da abertura da
+trave. Em seguida, o supervisor publica `goals_blue` e `goals_yellow`, devolve
+a bola e todos os robôs às poses iniciais e interrompe sua física antes de
+reiniciar o jogo.
+
+Os campos abaixo configuram uma partida:
+
+- `match_duration`: duração em segundos (padrão: `600`; use `0` para desativar);
+- `telemetry_path`: arquivo JSON Lines opcional com cada quadro, placar, evento
+  de gol, pose e velocidade das entidades. Os diretórios pais devem existir.
+
+Exemplo:
+
+```text
+VssReferee {
+  robotsPerTeam 3
+  match_duration 300
+  telemetry_path "/tmp/travesim-match.jsonl"
+}
+```
+
+O último quadro da telemetria contém `"finished":true`. Depois de gravá-lo e
+enviar o pacote final da visão, o supervisor encerra a simulação do Webots. Um
+`telemetry_path` vazio desativa a gravação em arquivo.
+
 ## 📁 Estrutura das pastas
 
 - **controllers/** - Pasta de controladores Webots
